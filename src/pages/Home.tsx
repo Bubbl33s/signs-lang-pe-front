@@ -1,4 +1,4 @@
-import { ResultCard } from '../components';
+import { ResultCard, CategorySelect } from '../components';
 import useSigns from '../hooks/useSigns';
 
 export default function Home() {
@@ -20,8 +20,10 @@ export default function Home() {
             <input
               type="text"
               placeholder="Buscar palabra..."
-              className="border border-purple-400 rounded-md px-2 py-1 w-full"
+              className="mb-2 border border-purple-400 rounded-md px-2 py-1 w-full"
             />
+
+            <CategorySelect />
           </div>
           <section className="space-y-4">
             {state.signsList.map((sign) => (

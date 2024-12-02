@@ -1,0 +1,8 @@
+#categories:focus-visible {
+  outline: none;
+}
+
+#categories option {
+  background: #d8b4fe;
+  color: rgb(0 0 0 / 0.6);
+}
