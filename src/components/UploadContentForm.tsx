@@ -32,6 +32,7 @@ export default function UploadContentForm() {
           </span>
           <input
             type="checkbox"
+            id="is-registered"
             value=""
             className="sr-only peer"
             onChange={(e) => setIsRegistered(!e.target.checked)}

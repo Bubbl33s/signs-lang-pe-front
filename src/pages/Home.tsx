@@ -30,7 +30,7 @@ export default function Home() {
             <input
               type="text"
               placeholder="Buscar palabra..."
-              className="mb-2 border border-purple-400 rounded-md px-2 py-1 w-full"
+              className="mb-2 border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
             />
 
             <CategorySelect />
