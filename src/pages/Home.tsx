@@ -1,8 +1,18 @@
+import { useMemo } from 'react';
 import { ResultCard, CategorySelect } from '../components';
 import useSigns from '../hooks/useSigns';
 
 export default function Home() {
   const { state } = useSigns();
+  const filteredList = useMemo(
+    () =>
+      state.signsList.filter((sign) =>
+        state.currentCategory
+          ? sign.categoryId === state.currentCategory._id
+          : sign
+      ),
+    [state.currentCategory]
+  );
 
   return (
     <main>
@@ -26,7 +36,7 @@ export default function Home() {
             <CategorySelect />
           </div>
           <section className="space-y-4">
-            {state.signsList.map((sign) => (
+            {filteredList.map((sign) => (
               <ResultCard key={sign._id} {...sign} />
             ))}
           </section>

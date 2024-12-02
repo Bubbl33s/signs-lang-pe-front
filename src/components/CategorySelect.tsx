@@ -1,11 +1,8 @@
-import { useState } from 'react';
 import '../assets/styles/CategorySelect.css';
 import useSigns from '../hooks/useSigns';
-import { Category } from '../types';
 
 export default function CategorySelect() {
-  const { state } = useSigns();
-  const [currentCategory, setCurrentCategory] = useState({} as Category | null);
+  const { state, dispatch } = useSigns();
 
   return (
     <div className="flex gap-1">
@@ -13,13 +10,15 @@ export default function CategorySelect() {
         id="categories"
         className="bg-gray-50 border border-purple-400 text-gray-900 text-sm rounded-md focus:ring-purple-500 focus:border-purple-500 block w-full p-2"
         onChange={(e) =>
-          setCurrentCategory(
-            e.target.value !== ''
-              ? state.categories.find(
-                  (category) => category._id === e.target.value
-                ) || null
-              : null
-          )
+          dispatch({
+            type: 'set-current-category',
+            payload:
+              e.target.value !== ''
+                ? state.categories.find(
+                    (category) => category._id === e.target.value
+                  ) || null
+                : null,
+          })
         }
       >
         <option value={''}>Todas las categorías</option>
@@ -33,7 +32,7 @@ export default function CategorySelect() {
 
       <div className="logo p-1">
         <img
-          src={currentCategory?.icon || '/dot.svg'}
+          src={state.currentCategory?.icon || '/dot.svg'}
           alt=""
           className="w-8 text-purple-600"
         />

@@ -12,7 +12,7 @@ function App() {
   useEffect(() => {
     (async () => {
       const labels = await LabelService.getSigns();
-      dispatch({ type: 'update-labels', payload: labels });
+      dispatch({ type: 'set-signs-list', payload: labels });
 
       const categories = await CategoryService.getCategories();
 
