@@ -1,10 +1,12 @@
+import { Label } from '../types';
+
 export type SignsActions = {
   type: 'update-labels';
   payload: any[];
 };
 
 export type SignsState = {
-  signsList: any;
+  signsList: Label[];
 };
 
 export const initialState: SignsState = {

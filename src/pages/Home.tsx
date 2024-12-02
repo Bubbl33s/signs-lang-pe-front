@@ -1,6 +1,9 @@
 import { ResultCard } from '../components';
+import useSigns from '../hooks/useSigns';
 
 export default function Home() {
+  const { state } = useSigns();
+
   return (
     <main>
       <section className="rounded-lg bg-white border border-purple-400 overflow-hidden">
@@ -22,7 +25,9 @@ export default function Home() {
           </div>
           <p className="mb-2">Coincidencias</p>
 
-          <ResultCard />
+          {state.signsList.map((sign) => (
+            <ResultCard key={sign._id} {...sign} />
+          ))}
         </div>
       </section>
     </main>
