@@ -1,5 +1,5 @@
 import Header from './Header';
 import Navbar from './Navbar';
-import SearchContainer from './SearchContainer';
+import ResultCard from './ResultCard';
 
-export { Header, Navbar, SearchContainer };
+export { Header, Navbar, ResultCard };

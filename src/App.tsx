@@ -1,4 +1,5 @@
-import { Header, Navbar, SearchContainer } from './components';
+import { Header, Navbar } from './components';
+import { Home } from './pages';
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div className="mb-4">
         <Navbar />
       </div>
-      <SearchContainer />
+      <Home />
     </div>
   );
 }
