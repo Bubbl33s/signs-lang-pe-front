@@ -20,7 +20,7 @@ export const SignsContext = createContext<SignsContextProps>(null!);
 export function SignsProvider({ children }: BudgetProviderProps) {
   const [state, dispatch] = useReducer(signsReducer, initialState);
 
-  const contextValue = useMemo(() => ({ state, dispatch }), [state, dispatch]);
+  const contextValue = useMemo(() => ({ state, dispatch }), [state]);
 
   return (
     <SignsContext.Provider value={contextValue}>
