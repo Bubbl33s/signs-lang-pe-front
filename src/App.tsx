@@ -1,16 +1,21 @@
+import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { Header, Navbar } from './components';
 import { Home } from './pages';
 
 function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-green-100 py-3 px-4">
-      <div className="mb-4">
-        <Header />
-      </div>
-      <div className="mb-4">
-        <Navbar />
-      </div>
-      <Home />
+      <Router>
+        <div className="mb-4">
+          <Header />
+        </div>
+        <div className="mb-4">
+          <Navbar />
+        </div>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
