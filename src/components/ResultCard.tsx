@@ -10,7 +10,7 @@ export default function ResultCard({
       <img
         src={primaryContent?.url || 'https://via.placeholder.com/300'}
         alt="placeholder"
-        className="rounded-xl mb-3 w-full"
+        className="rounded-xl mb-3 h-44 object-cover block mx-auto"
       />
       <footer>
         <h3 className="font-bold mb-1">{name}</h3>
