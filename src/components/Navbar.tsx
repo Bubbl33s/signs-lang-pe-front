@@ -1,15 +1,20 @@
+import { Link, useLocation } from 'react-router';
+import '../assets/styles/Navbar.css';
+
 export default function Navbar() {
+  const location = useLocation();
+
+  const isActive = (path: string) =>
+    location.pathname === path ? 'active' : '';
+
   return (
     <nav className="bg-purple-200 rounded-lg p-1">
-      <ul className="font-medium flex text-center">
-        <li className="flex-1 py-1 bg-gray-50 rounded-md">
-          <a href="/">Buscar</a>
+      <ul className="font-medium flex text-center text-gray-400">
+        <li className={`${isActive('/')} flex-1 py-1`}>
+          <Link to="/">Buscar</Link>
         </li>
-        <li className="text-gray-400 flex-1 py-1">
-          <a href="/about">Cargar</a>
-        </li>
-        <li className="text-gray-400 flex-1 py-1">
-          <a href="/contact">Moderar</a>
+        <li className={`${isActive('/upload')} flex-1 py-1`}>
+          <Link to="/upload">Cargar</Link>
         </li>
       </ul>
     </nav>

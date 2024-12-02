@@ -31,5 +31,6 @@ module.exports = {
   plugins: ['@typescript-eslint', 'react'],
   rules: {
     'react/react-in-jsx-scope': 0,
+    'comma-dangle': ['ignore', 'always-multiline'],
   },
 };
