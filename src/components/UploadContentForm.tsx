@@ -20,7 +20,7 @@ export default function UploadContentForm() {
   }, [state.currentCategory, state.signsList]);
 
   return (
-    <form className="space-y-3">
+    <form className="space-y-3 divide-y-2 divide-purple-200">
       <div>
         <label className="inline-flex items-center cursor-pointer gap-3">
           <span
@@ -47,26 +47,29 @@ export default function UploadContentForm() {
         </label>
       </div>
 
-      <div className="">
-        <label htmlFor="categories">Categorías</label>
-        <CategorySelect defaultText="Selecciona una categoría" />
-      </div>
+      <div className="pt-3">
+        <div className="mb-3">
+          <label htmlFor="categories">Categorías</label>
+          <CategorySelect defaultText="Selecciona una categoría" />
+        </div>
 
-      <div>
-        <label htmlFor={isRegistered ? 'label' : 'label-name'}>Palabra</label>
-        {isRegistered ? (
-          <LabelSelect labels={filteredList} />
-        ) : (
-          <input
-            type="text"
-            id="label-name"
-            className="bg-gray-50 border border-purple-400 text-gray-900 text-sm rounded-md focus:ring-purple-500 focus:border-purple-500 block w-full p-2 h-[37px]"
-            placeholder="Ingresa la palabra"
-          />
-        )}
+        <div>
+          <label htmlFor={isRegistered ? 'label' : 'label-name'}>Palabra</label>
+          {isRegistered ? (
+            <LabelSelect labels={filteredList} />
+          ) : (
+            <input
+              type="text"
+              id="label-name"
+              className="bg-gray-50 border border-purple-400 text-gray-900 text-sm rounded-md focus:ring-purple-500 focus:border-purple-500 block w-full p-2 h-[37px]"
+              placeholder="Ingresa la palabra"
+            />
+          )}
+        </div>
       </div>
-
-      <DragDrop />
+      <div className="pt-3">
+        <DragDrop />
+      </div>
     </form>
   );
 }
