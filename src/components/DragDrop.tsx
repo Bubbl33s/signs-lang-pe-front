@@ -52,7 +52,7 @@ export default function DragDrop() {
   );
 
   return (
-    <div className="flex h-52 items-center justify-center">
+    <div className="flex h-64 items-center justify-center">
       <div
         className={`${file != null ? 'hidden' : 'flex'} hover:text-gray-900`}
       >
@@ -66,7 +66,7 @@ export default function DragDrop() {
 
       {file && (
         <div className="h-full flex flex-col justify-between items-center">
-          <img src={file} className="h-40 object-contain" />
+          <img src={file} className="h-52 object-contain" />
 
           <div className="flex gap-2">
             <button
