@@ -27,7 +27,17 @@ export default function Navbar() {
             )}  py-1  h-full w-full rounded-md transition-colors`}
             to="/upload"
           >
-            Cargar
+            Contribuir
+          </Link>
+        </li>
+        <li className="flex-1 flex">
+          <Link
+            className={`${isActive(
+              '/moderate'
+            )}  py-1  h-full w-full rounded-md transition-colors`}
+            to="/moderate"
+          >
+            Moderar
           </Link>
         </li>
       </ul>

@@ -17,13 +17,13 @@ export type SignsActions =
 export type SignsState = {
   signsList: Label[];
   categories: Category[];
-  currentCategory: Category;
+  currentCategory: Category | null;
 };
 
 export const initialState: SignsState = {
   signsList: [],
   categories: [],
-  currentCategory: {} as Category,
+  currentCategory: null,
 };
 
 export const signsReducer = (state: SignsState, action: SignsActions) => {
