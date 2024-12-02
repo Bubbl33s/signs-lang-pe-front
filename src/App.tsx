@@ -6,7 +6,9 @@ function App() {
       <div className="mb-4">
         <Header />
       </div>
-      <Navbar />
+      <div className="mb-4">
+        <Navbar />
+      </div>
       <SearchContainer />
     </div>
   );
