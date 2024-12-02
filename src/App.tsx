@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { Header, Navbar } from './components';
-import { Home } from './pages';
+import { Home, Upload } from './pages';
 import useSigns from './hooks/useSigns';
 import { useEffect } from 'react';
 import { LabelService } from './services/labelService';
@@ -26,6 +26,7 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/upload" element={<Upload />} />
         </Routes>
       </Router>
     </div>

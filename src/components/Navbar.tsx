@@ -13,11 +13,8 @@ export default function Navbar() {
         <li className={`${isActive('/')} flex-1 py-1`}>
           <Link to="/">Buscar</Link>
         </li>
-        <li className={`${isActive('/about')} flex-1 py-1`}>
-          <Link to="/about">Cargar</Link>
-        </li>
-        <li className={`${isActive('/contact')} flex-1 py-1`}>
-          <Link to="/contact">Moderar</Link>
+        <li className={`${isActive('/upload')} flex-1 py-1`}>
+          <Link to="/upload">Cargar</Link>
         </li>
       </ul>
     </nav>
