@@ -1,8 +1,18 @@
-import { ResultCard } from '../components';
+import { useMemo } from 'react';
+import { ResultCard, CategorySelect } from '../components';
 import useSigns from '../hooks/useSigns';
 
 export default function Home() {
   const { state } = useSigns();
+  const filteredList = useMemo(
+    () =>
+      state.signsList.filter((sign) =>
+        state.currentCategory
+          ? sign.categoryId === state.currentCategory._id
+          : sign
+      ),
+    [state.currentCategory]
+  );
 
   return (
     <main>
@@ -20,11 +30,13 @@ export default function Home() {
             <input
               type="text"
               placeholder="Buscar palabra..."
-              className="border border-purple-400 rounded-md px-2 py-1 w-full"
+              className="mb-2 border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
             />
+
+            <CategorySelect />
           </div>
           <section className="space-y-4">
-            {state.signsList.map((sign) => (
+            {filteredList.map((sign) => (
               <ResultCard key={sign._id} {...sign} />
             ))}
           </section>

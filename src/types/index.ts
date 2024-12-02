@@ -18,3 +18,12 @@ export type Content = {
   createdAt: string;
   __v: number;
 };
+
+export type Category = {
+  _id: string;
+  name: string;
+  descrption: string;
+  icon: string;
+  createdAt: string;
+  __v: number;
+};

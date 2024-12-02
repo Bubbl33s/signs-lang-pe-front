@@ -4,6 +4,7 @@ import { Home, Upload } from './pages';
 import useSigns from './hooks/useSigns';
 import { useEffect } from 'react';
 import { LabelService } from './services/labelService';
+import { CategoryService } from './services/categoryService';
 
 function App() {
   const { dispatch } = useSigns();
@@ -11,7 +12,11 @@ function App() {
   useEffect(() => {
     (async () => {
       const labels = await LabelService.getSigns();
-      dispatch({ type: 'update-labels', payload: labels });
+      dispatch({ type: 'set-signs-list', payload: labels });
+
+      const categories = await CategoryService.getCategories();
+
+      dispatch({ type: 'set-categories', payload: categories });
     })();
   }, [dispatch]);
 

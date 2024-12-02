@@ -9,12 +9,36 @@ export default function Navbar() {
 
   return (
     <nav className="bg-purple-200 rounded-lg p-1">
-      <ul className="font-medium flex text-center text-gray-400">
-        <li className={`${isActive('/')} flex-1 py-1`}>
-          <Link to="/">Buscar</Link>
+      <ul className="font-medium flex text-center text-gray-400 gap-1">
+        <li className="flex-1 flex">
+          <Link
+            className={`${isActive(
+              '/'
+            )}  py-1  h-full w-full rounded-md transition-colors`}
+            to="/"
+          >
+            Buscar
+          </Link>
         </li>
-        <li className={`${isActive('/upload')} flex-1 py-1`}>
-          <Link to="/upload">Cargar</Link>
+        <li className="flex-1 flex">
+          <Link
+            className={`${isActive(
+              '/upload'
+            )}  py-1  h-full w-full rounded-md transition-colors`}
+            to="/upload"
+          >
+            Contribuir
+          </Link>
+        </li>
+        <li className="flex-1 flex">
+          <Link
+            className={`${isActive(
+              '/moderate'
+            )}  py-1  h-full w-full rounded-md transition-colors`}
+            to="/moderate"
+          >
+            Moderar
+          </Link>
         </li>
       </ul>
     </nav>

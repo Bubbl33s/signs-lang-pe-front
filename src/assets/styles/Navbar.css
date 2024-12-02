@@ -1,9 +1,9 @@
 .active {
   color: #000;
   background-color: rgb(249 250 251 / 1);
-  border-radius: 0.375rem;
 }
 
-li:not(.active) > a:hover {
+li > *:not(.active):hover {
   color: rgb(0 0 0 / 0.6);
+  background-color: #d8b4fe;
 }
