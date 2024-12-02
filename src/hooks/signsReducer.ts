@@ -1,26 +1,21 @@
 export type SignsActions = {
-  type: 'get-signs';
+  type: 'update-labels';
+  payload: any[];
 };
 
 export type SignsState = {
-  signs: any;
+  signsList: any;
 };
 
 export const initialState: SignsState = {
-  signs: [],
-};
-
-const localStorageSigns = () => {
-  const signs = localStorage.getItem('signs-data');
-
-  return signs ? JSON.parse(signs) : [];
+  signsList: [],
 };
 
 export const signsReducer = (state: SignsState, action: SignsActions) => {
-  if (action.type === 'get-signs') {
+  if (action.type === 'update-labels') {
     return {
       ...state,
-      signs: ['a'],
+      signsList: action.payload,
     };
   }
 

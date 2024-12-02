@@ -1,8 +1,20 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { Header, Navbar } from './components';
 import { Home } from './pages';
+import useSigns from './hooks/useSigns';
+import { useEffect } from 'react';
+import { LabelService } from './services/labelService';
 
 function App() {
+  const { dispatch } = useSigns();
+
+  useEffect(() => {
+    (async () => {
+      const labels = await LabelService.getSigns();
+      dispatch({ type: 'update-labels', payload: labels });
+    })();
+  }, [dispatch]);
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-green-100 py-3 px-4">
       <Router>

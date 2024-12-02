@@ -9,6 +9,7 @@ import {
 type SignsContextProps = {
   state: SignsState;
   dispatch: Dispatch<SignsActions>;
+  totalSigns: number;
 };
 
 type BudgetProviderProps = {
@@ -20,10 +21,13 @@ export const SignsContext = createContext<SignsContextProps>(null!);
 export function SignsProvider({ children }: BudgetProviderProps) {
   const [state, dispatch] = useReducer(signsReducer, initialState);
 
-  const contextValue = useMemo(() => ({ state, dispatch }), [state]);
+  const totalSigns = useMemo(
+    () => state.signsList.length || 0,
+    [state.signsList]
+  );
 
   return (
-    <SignsContext.Provider value={contextValue}>
+    <SignsContext.Provider value={{ state, dispatch, totalSigns }}>
       {children}
     </SignsContext.Provider>
   );
