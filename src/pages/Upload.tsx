@@ -1,11 +1,13 @@
-import { DragDrop } from '../components';
+import { UploadContentForm } from '../components';
 
 export default function Upload() {
   return (
-    <div>
-      <p>Cargar imagenes</p>
+    <main>
+      <div className="rounded-lg border border-purple-400 p-4">
+        <h3 className="text-center text-lg mb-3">Agregar contenido</h3>
 
-      <DragDrop />
-    </div>
+        <UploadContentForm />
+      </div>
+    </main>
   );
 }

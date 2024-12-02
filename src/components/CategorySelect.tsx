@@ -1,7 +1,11 @@
 import '../assets/styles/CategorySelect.css';
 import useSigns from '../hooks/useSigns';
 
-export default function CategorySelect() {
+export default function CategorySelect({
+  defaultText = 'Todas las categorías',
+}: {
+  defaultText?: string;
+}) {
   const { state, dispatch } = useSigns();
 
   return (
@@ -21,7 +25,7 @@ export default function CategorySelect() {
           })
         }
       >
-        <option value={''}>Todas las categorías</option>
+        <option value={''}>{defaultText}</option>
         {state.categories.map((category) => (
           <option key={category._id} value={category._id}>
             {' '}

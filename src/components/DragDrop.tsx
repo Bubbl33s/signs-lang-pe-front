@@ -68,12 +68,23 @@ export default function DragDrop() {
         <div className="h-full flex flex-col justify-between items-center">
           <img src={file} className="h-40 object-contain" />
 
-          <button
-            className="bg-purple-300 rounded-md py-2 px-3 text-sm hover:bg-purple-500 hover:text-white transition-all"
-            onClick={() => setFile(null)}
-          >
-            Elegir otra imagen
-          </button>
+          <div className="flex gap-2">
+            <button
+              className="bg-purple-300 border border-purple-500 rounded-md py-2 px-3 text-sm hover:bg-purple-500 hover:text-white transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
+                setFile(null);
+              }}
+            >
+              Elegir otra imagen
+            </button>
+
+            <input
+              type="submit"
+              value="Subir imagen"
+              className="bg-green-500 rounded-md py-2 px-3 text-sm font-bold text-white border border-green-500 hover:bg-green-300 hover:text-black transition-colors hover:cursor-pointer"
+            />
+          </div>
         </div>
       )}
     </div>
