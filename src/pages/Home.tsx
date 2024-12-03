@@ -11,7 +11,7 @@ export default function Home() {
           ? sign.categoryId === state.currentCategory._id
           : sign
       ),
-    [state.currentCategory]
+    [state.currentCategory, state.signsList]
   );
 
   return (

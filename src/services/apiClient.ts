@@ -20,7 +20,11 @@ export const apiClientMultipart = axios.create({
 export function setAuthToken(token: string | null) {
   if (token) {
     apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+    apiClientMultipart.defaults.headers.common[
+      'Authorization'
+    ] = `Bearer ${token}`;
   } else {
     delete apiClient.defaults.headers.common['Authorization'];
+    delete apiClientMultipart.defaults.headers.common['Authorization'];
   }
 }

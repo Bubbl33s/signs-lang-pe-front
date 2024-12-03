@@ -3,11 +3,17 @@ import useSigns from '../hooks/useSigns';
 import DragDrop from './DragDrop';
 import CategorySelect from './CategorySelect';
 import LabelSelect from './LabelSelect';
+import { ContentService } from '../services/contentService';
 
 export default function UploadContentForm() {
   const [isRegistered, setIsRegistered] = useState(true);
   const { state } = useSigns();
   const [filteredList, setFilteredList] = useState(state.signsList);
+
+  const [labelId, setLabelId] = useState('');
+  const [labelName, setLabelName] = useState('');
+  const [categoryId, setCategoryId] = useState('');
+  const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
     setFilteredList(
@@ -19,8 +25,54 @@ export default function UploadContentForm() {
     );
   }, [state.currentCategory, state.signsList]);
 
+  const handleContentSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    form.elements.namedItem('label-id') &&
+      setLabelId(
+        (form.elements.namedItem('label-id') as HTMLInputElement).value
+      );
+    setCategoryId(
+      (form.elements.namedItem('category-id') as HTMLInputElement).value
+    );
+
+    if (!file) {
+      console.log('no hay archivo');
+      return;
+    }
+
+    if (isRegistered) {
+      console.log('enviado con labelId');
+      await ContentService.postContent({
+        file,
+        contributorId: '674a14e861abe6c6fceff19a',
+        labelId,
+      });
+
+      setFile(null);
+
+      return;
+    } else {
+      console.log('enviado sin labelId');
+      await ContentService.postContent({
+        file,
+        contributorId: '674a14e861abe6c6fceff19a',
+        categoryId,
+        labelName,
+      });
+
+      setFile(null);
+
+      return;
+    }
+  };
+
   return (
-    <form className="space-y-3 divide-y-2 divide-purple-200">
+    <form
+      className="space-y-3 divide-y-2 divide-purple-200"
+      onSubmit={handleContentSubmit}
+    >
       <div>
         <label className="inline-flex items-center cursor-pointer gap-3">
           <span
@@ -64,19 +116,20 @@ export default function UploadContentForm() {
             Palabra
           </label>
           {isRegistered ? (
-            <LabelSelect labels={filteredList} />
+            <LabelSelect labels={filteredList} setLabelId={setLabelId} />
           ) : (
             <input
               type="text"
               id="label-name"
               className="bg-gray-50 border border-purple-400 text-gray-900 text-sm rounded-md focus:ring-purple-500 focus:border-purple-500 block w-full p-2 h-[37px]"
               placeholder="Ingresa la palabra"
+              onChange={(e) => setLabelName(e.target.value)}
             />
           )}
         </div>
       </div>
       <div className="pt-3">
-        <DragDrop />
+        <DragDrop file={file} setFile={setFile} />
       </div>
     </form>
   );
