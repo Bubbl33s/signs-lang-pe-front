@@ -50,12 +50,19 @@ export default function UploadContentForm() {
 
       <div className="pt-3">
         <div className="mb-3">
-          <label htmlFor="categories">Categorías</label>
+          <label htmlFor="categories" className="block mb-1">
+            Categorías
+          </label>
           <CategorySelect defaultText="Selecciona una categoría" />
         </div>
 
         <div>
-          <label htmlFor={isRegistered ? 'label' : 'label-name'}>Palabra</label>
+          <label
+            htmlFor={isRegistered ? 'label' : 'label-name'}
+            className="block mb-1"
+          >
+            Palabra
+          </label>
           {isRegistered ? (
             <LabelSelect labels={filteredList} />
           ) : (
