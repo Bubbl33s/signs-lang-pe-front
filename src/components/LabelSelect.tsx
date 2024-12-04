@@ -1,12 +1,11 @@
 import { Label } from '../types';
 
-export default function LabelSelect({
-  labels,
-  setLabelId,
-}: {
+type LabelSelectProps = {
   labels: Label[];
   setLabelId: (labelId: string) => void;
-}) {
+};
+
+export default function LabelSelect({ labels, setLabelId }: LabelSelectProps) {
   return (
     <div className="flex gap-1">
       <select

@@ -1,11 +1,13 @@
 import '../assets/styles/CategorySelect.css';
 import useSigns from '../hooks/useSigns';
 
+type CategorySelectProps = {
+  defaultText?: string;
+};
+
 export default function CategorySelect({
   defaultText = 'Todas las categorías',
-}: {
-  defaultText?: string;
-}) {
+}: CategorySelectProps) {
   const { state, dispatch } = useSigns();
 
   return (

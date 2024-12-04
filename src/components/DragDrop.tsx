@@ -31,13 +31,12 @@ const rejectStyle = {
   backgroundColor: '#ffa8b9',
 };
 
-export default function DragDrop({
-  file,
-  setFile,
-}: {
+type DragDropProps = {
   file: File | null;
   setFile: (file: File | null) => void;
-}) {
+};
+
+export default function DragDrop({ file, setFile }: DragDropProps) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFile(acceptedFiles[0]);
   }, []);

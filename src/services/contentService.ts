@@ -20,10 +20,6 @@ export const ContentService = {
       'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NzRhMTRlODYxYWJlNmM2ZmNlZmYxOWEiLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3MzMxODU0MDYsImV4cCI6MTczMzE5MjYwNn0.mlSFu5fK0BH38PXCHSceBH0BD0WVU2uQnKXCbgB176E'
     );
 
-    console.log('labelId', labelId);
-    console.log('categoryId', categoryId);
-    console.log('labelName', labelName);
-
     try {
       if (labelId) {
         const response = await apiClientMultipart.post('/contents', {
