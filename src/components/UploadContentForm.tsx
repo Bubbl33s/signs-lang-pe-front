@@ -5,24 +5,17 @@ import DragDrop from './DragDrop';
 import CategorySelect from './CategorySelect';
 import LabelSelect from './LabelSelect';
 import { ContentService } from '../services/contentService';
-
-type FormData = {
-  file: File | null;
-  contributorId: string;
-  categoryId?: string;
-  labelName?: string;
-  labelId?: string;
-};
+import { showToast } from '../helpers/toastify';
+import 'toastify-js/src/toastify.css';
+import '../assets/styles/Toastify.css';
 
 export default function UploadContentForm() {
-  const { register, handleSubmit, setValue, watch, reset } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm();
   const [isRegistered, setIsRegistered] = useState(true);
   const { state } = useSigns();
   const [filteredList, setFilteredList] = useState(state.signsList);
 
   const [labelId, setLabelId] = useState('');
-  const [labelName, setLabelName] = useState('');
-  const [categoryId, setCategoryId] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
@@ -35,42 +28,74 @@ export default function UploadContentForm() {
     );
   }, [state.currentCategory, state.signsList]);
 
+  useEffect(() => {
+    if (state.currentCategory) {
+      setValue('categoryId', state.currentCategory._id);
+    }
+  }, [state.currentCategory, setValue]);
+
+  useEffect(() => {
+    if (labelId) {
+      setValue('labelId', labelId);
+    }
+  });
+
   const onSubmit = async (data: any) => {
     console.log('Form sent');
     console.log(data);
-    // const form = e.target as HTMLFormElement;
-    // form.elements.namedItem('label-id') &&
-    //   setLabelId(
-    //     (form.elements.namedItem('label-id') as HTMLInputElement).value
-    //   );
-    // setCategoryId(
-    //   (form.elements.namedItem('category-id') as HTMLInputElement).value
-    // );
-    // if (!file) {
-    //   console.log('no hay archivo');
-    // }
-    // if (isRegistered) {
-    //   console.log('enviado con labelId');
-    //   await ContentService.postContent({
-    //     file,
-    //     contributorId: '674a14e861abe6c6fceff19a',
-    //     labelId,
-    //   });
-    //   setFile(null);
-    // } else {
-    //   console.log('enviado sin labelId');
-    //   await ContentService.postContent({
-    //     file,
-    //     contributorId: '674a14e861abe6c6fceff19a',
-    //     categoryId,
-    //     labelName,
-    //   });
-    //   setFile(null);
-    // }
+
+    if (!file) {
+      showToast({
+        text: 'Sube una imagen',
+        color: 'error',
+      });
+
+      return;
+    }
+
+    let response;
+
+    if (isRegistered) {
+      response = await ContentService.postContent({
+        file,
+        labelId: data.labelId,
+        contributorId: '674a14e861abe6c6fceff19a',
+      });
+    } else {
+      response = await ContentService.postContent({
+        file,
+        categoryId: data.categoryId,
+        labelName: data.labelName,
+        contributorId: '674a14e861abe6c6fceff19a',
+      });
+    }
+
+    if (response.code === 200 || response.code === 201) {
+      showToast({
+        text: 'Imagen cargada',
+        color: 'success',
+      });
+
+      reset();
+    } else {
+      showToast({
+        text: 'Error al cargar la imagen',
+        color: 'error',
+      });
+    }
   };
 
   const onErrors = (errors: any) => {
+    console.log('error');
     console.log(errors);
+
+    const firstErrorMessage = (Object.values(errors)[0] as { message: string })
+      .message;
+
+    showToast({
+      text: firstErrorMessage,
+      color: 'error',
+    });
   };
 
   return (
@@ -110,15 +135,14 @@ export default function UploadContentForm() {
           <label htmlFor="categories" className="block mb-1">
             Categorías
           </label>
-          <CategorySelect
-            defaultText="Selecciona una categoría"
-            // {...register('categoryId', { required: true })}
-          />
+          <CategorySelect defaultText="Selecciona una categoría" />
           <input
             type="text"
-            value={categoryId}
+            value={state.currentCategory ? state.currentCategory._id : ''}
             hidden
-            {...register('categoryId', { required: true })}
+            {...register('categoryId', {
+              required: !isRegistered ? 'Selecciona la categoría' : false,
+            })}
           />
         </div>
 
@@ -130,14 +154,26 @@ export default function UploadContentForm() {
             Palabra
           </label>
           {isRegistered ? (
-            <LabelSelect labels={filteredList} setLabelId={setLabelId} />
+            <div>
+              <LabelSelect labels={filteredList} setLabelId={setLabelId} />
+              <input
+                type="text"
+                value={labelId}
+                hidden
+                {...register('labelId', {
+                  required: isRegistered ? 'Selecciona la palabra' : false,
+                })}
+              />
+            </div>
           ) : (
             <input
               type="text"
               id="label-name"
               className="bg-gray-50 border border-purple-400 text-gray-900 text-sm rounded-md focus:ring-purple-500 focus:border-purple-500 block w-full p-2 h-[37px]"
               placeholder="Ingresa la palabra"
-              {...register('labelName', { required: true })}
+              {...register('labelName', {
+                required: !isRegistered ? 'Ingresa la palabra' : false,
+              })}
             />
           )}
         </div>

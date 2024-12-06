@@ -14,9 +14,13 @@ export default function LabelSelect({ labels, setLabelId }: LabelSelectProps) {
         disabled={labels.length === 0}
         onChange={(e) => setLabelId(e.target.value)}
       >
-        {labels.length === 0 && (
-          <option selected value="No hay entradas" disabled>
+        {labels.length === 0 ? (
+          <option selected value="No hay entradas">
             No hay entradas
+          </option>
+        ) : (
+          <option selected value="">
+            Selecciona la palabra
           </option>
         )}
         {labels.map((label) => (
