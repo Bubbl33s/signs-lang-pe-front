@@ -20,7 +20,7 @@ export default function Login() {
     const response = await AuthService.login(data.email, data.password);
 
     if (response?.status == 200) {
-      login(response.data.user, response.data.token);
+      login(response.data.token, response.data.user);
       reset();
 
       showToast({

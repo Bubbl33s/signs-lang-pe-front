@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSigns from '../hooks/useSigns';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import DragDrop from './DragDrop';
 import CategorySelect from './CategorySelect';
 import LabelSelect from './LabelSelect';
@@ -20,8 +22,9 @@ export default function UploadContentForm() {
   const { register, handleSubmit, setValue, reset } = useForm<FormData>();
   const [isRegistered, setIsRegistered] = useState(true);
   const { state } = useSigns();
-  const [filteredList, setFilteredList] = useState(state.signsList);
+  const { user } = useContext(AuthContext);
 
+  const [filteredList, setFilteredList] = useState(state.signsList);
   const [labelId, setLabelId] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
@@ -57,20 +60,29 @@ export default function UploadContentForm() {
       return;
     }
 
+    if (!user?._id) {
+      showToast({
+        text: 'Sesión no iniciada',
+        color: 'error',
+      });
+
+      return;
+    }
+
     let response;
 
     if (isRegistered) {
       response = await ContentService.postContent({
         file,
         labelId: data.labelId,
-        contributorId: '674a14e861abe6c6fceff19a',
+        contributorId: user._id,
       });
     } else {
       response = await ContentService.postContent({
         file,
         categoryId: data.categoryId,
         labelName: data.labelName,
-        contributorId: '674a14e861abe6c6fceff19a',
+        contributorId: user._id,
       });
     }
 
@@ -81,6 +93,7 @@ export default function UploadContentForm() {
       });
 
       reset();
+      setFile(null);
     } else {
       showToast({
         text: 'Error al cargar la imagen',
@@ -94,9 +107,9 @@ export default function UploadContentForm() {
       className="space-y-3 divide-y-2 divide-purple-200"
       onSubmit={handleSubmit(onSubmit, onErrors)}
     >
-      <div>
+      <div className="flex justify-center">
         <label
-          className="inline-flex items-center cursor-pointer gap-3"
+          className="inline-flex items-center cursor-pointer gap-3 mx-auto"
           htmlFor="is-registered"
         >
           <span
