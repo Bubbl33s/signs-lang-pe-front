@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect, ReactNode } from 'react';
+import { setAuthToken as setAxiosClientAuthToken } from '../services/apiClient';
 import { User } from '../types';
 
 type AuthContextProps = {
@@ -23,6 +24,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       setAuthToken(token);
+      setAxiosClientAuthToken(token);
     }
 
     const user = localStorage.getItem('userSignsApp');
@@ -37,6 +39,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.setItem('userSignsApp', JSON.stringify(user));
 
     setAuthToken(token);
+    setAxiosClientAuthToken(token);
     setUser(user);
   };
 
@@ -45,6 +48,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     localStorage.removeItem('userSignsApp');
 
     setAuthToken(null);
+    setAxiosClientAuthToken(null);
     setUser(null);
   };
 

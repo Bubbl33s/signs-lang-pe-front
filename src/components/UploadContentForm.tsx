@@ -6,11 +6,18 @@ import CategorySelect from './CategorySelect';
 import LabelSelect from './LabelSelect';
 import { ContentService } from '../services/contentService';
 import { showToast } from '../helpers/toastify';
+import { onErrors } from '../helpers/onErrors';
 import 'toastify-js/src/toastify.css';
 import '../assets/styles/Toastify.css';
 
+type FormData = {
+  categoryId?: string;
+  labelId?: string;
+  labelName?: string;
+};
+
 export default function UploadContentForm() {
-  const { register, handleSubmit, setValue, reset } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm<FormData>();
   const [isRegistered, setIsRegistered] = useState(true);
   const { state } = useSigns();
   const [filteredList, setFilteredList] = useState(state.signsList);
@@ -40,10 +47,7 @@ export default function UploadContentForm() {
     }
   });
 
-  const onSubmit = async (data: any) => {
-    console.log('Form sent');
-    console.log(data);
-
+  const onSubmit = async (data: FormData) => {
     if (!file) {
       showToast({
         text: 'Sube una imagen',
@@ -70,7 +74,7 @@ export default function UploadContentForm() {
       });
     }
 
-    if (response.code === 200 || response.code === 201) {
+    if (response?.status === 200 || response?.status === 201) {
       showToast({
         text: 'Imagen cargada',
         color: 'success',
@@ -83,19 +87,6 @@ export default function UploadContentForm() {
         color: 'error',
       });
     }
-  };
-
-  const onErrors = (errors: any) => {
-    console.log('error');
-    console.log(errors);
-
-    const firstErrorMessage = (Object.values(errors)[0] as { message: string })
-      .message;
-
-    showToast({
-      text: firstErrorMessage,
-      color: 'error',
-    });
   };
 
   return (

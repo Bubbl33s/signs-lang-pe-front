@@ -28,9 +28,7 @@ export const ContentService = {
           labelId: labelId,
         });
 
-        window.alert('Contenido subido correctamente');
-
-        return response.data;
+        return response;
       } else {
         const response = await apiClientMultipart.post('/contents', {
           file: file,
@@ -39,9 +37,7 @@ export const ContentService = {
           labelName: labelName,
         });
 
-        window.alert('Contenido subido correctamente');
-
-        return response.data;
+        return response;
       }
     } catch (error) {
       console.error('Error posting content', error);
