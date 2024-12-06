@@ -139,7 +139,7 @@ export default function UploadContentForm() {
 
       <div className="pt-3">
         <div className="mb-3">
-          <label htmlFor="categories" className="block mb-1">
+          <label htmlFor="categories" className="inline-block mb-1">
             Categorías
           </label>
           <CategorySelect defaultText="Selecciona una categoría" />
@@ -157,7 +157,7 @@ export default function UploadContentForm() {
         <div>
           <label
             htmlFor={isRegistered ? 'label' : 'label-name'}
-            className="block mb-1"
+            className="inline-block  mb-1"
           >
             Palabra
           </label>

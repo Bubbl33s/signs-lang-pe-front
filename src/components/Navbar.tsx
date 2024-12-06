@@ -46,9 +46,9 @@ export default function Navbar() {
             </Link>
           ) : (
             <Link
-              className={`${isActive(
-                '/login'
-              )}  py-1  h-full w-full rounded-md transition-colors`}
+              className={`${
+                isActive('/login') || isActive('/signup')
+              } py-1 h-full w-full rounded-md transition-colors`}
               to="/login"
             >
               Acceder

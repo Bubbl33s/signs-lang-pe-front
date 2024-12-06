@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 import { AuthService } from '../services/authService';
 import { onErrors } from '../helpers/onErrors';
@@ -49,7 +49,7 @@ export default function Login() {
             onSubmit={handleSubmit(onSubmit, onErrors)}
           >
             <div>
-              <label htmlFor="email" className="mb-1">
+              <label htmlFor="email" className="inline-block mb-1">
                 Correo
               </label>
               <input
@@ -64,7 +64,7 @@ export default function Login() {
             </div>
 
             <div>
-              <label htmlFor="password" className="mb-1">
+              <label htmlFor="password" className="inline-block mb-1">
                 Contraseña
               </label>
               <input
@@ -84,6 +84,18 @@ export default function Login() {
                 value="Iniciar Sesión"
                 className="bg-green-500 rounded-md py-2 px-3 block mx-auto font-bold text-white border border-green-500 hover:bg-green-300 hover:text-black transition-colors hover:cursor-pointer"
               />
+            </div>
+
+            <div>
+              <p>
+                ¿Aún no tienes cuenta?{' '}
+                <Link
+                  to="/signup"
+                  className="text-purple-600 font-semibold underline underline-offset-2 hover:text-purple-400 visited:text-purple-800"
+                >
+                  Regístrate
+                </Link>
+              </p>
             </div>
           </form>
         </div>
