@@ -13,4 +13,14 @@ export const AuthService = {
       console.error('Error logging in', error);
     }
   },
+
+  async signup(data: any) {
+    try {
+      const response = await apiClient.post('/users', data);
+
+      return response;
+    } catch (error) {
+      console.error('Error signing up', error);
+    }
+  },
 };

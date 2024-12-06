@@ -3,15 +3,24 @@ import { useForm } from 'react-hook-form';
 import { AuthContext } from '../context/AuthContext';
 
 import { useNavigate, Link } from 'react-router';
+import { onErrors } from '../helpers/onErrors';
+import { AuthService } from '../services/authService';
+import { showToast } from '../helpers/toastify';
+
+enum Role {
+  User = 'user',
+  Moderator = 'moderator',
+}
 
 type FormData = {
-  name: string;
+  fullName: string;
   email: string;
   password: string;
   passwordConfirm: string;
   username: string;
   isDeafMute: boolean;
   knowsSignLanguage: boolean;
+  role: Role;
 };
 
 export default function Signup() {
@@ -24,6 +33,39 @@ export default function Signup() {
     setValue('username', value);
   };
 
+  const onSubmit = async (data: FormData) => {
+    console.log(data);
+
+    if (data.password !== data.passwordConfirm) {
+      showToast({
+        text: 'Las contraseñas no coinciden',
+        color: 'error',
+      });
+      return;
+    }
+
+    data.role = data.knowsSignLanguage ? Role.Moderator : Role.User;
+
+    const response = await AuthService.signup(data);
+
+    if (response?.status == 201 || response?.status == 200) {
+      login(response.data.token, response.data.user);
+      reset();
+
+      showToast({
+        text: 'Usuario creado',
+        color: 'success',
+      });
+
+      navigate('/profile');
+    } else {
+      showToast({
+        text: 'Error al crear cuenta',
+        color: 'error',
+      });
+    }
+  };
+
   return (
     <main>
       <div className="w-full">
@@ -33,20 +75,28 @@ export default function Signup() {
         <div className="rounded-lg border border-purple-400 border-t-0 rounded-t-none p-4 pb-5">
           <form
             className="space-y-3"
-            // onSubmit={handleSubmit(onSubmit, onErrors)}
+            onSubmit={handleSubmit(onSubmit, onErrors)}
           >
             <div>
-              <label htmlFor="name" className="inline-block mb-1">
+              <label htmlFor="fullName" className="inline-block mb-1">
                 Nombre Completo
               </label>
               <input
                 type="text"
-                id="name"
+                id="fullName"
                 placeholder="Ingresa tu nombre"
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
-                // {...register('email', {
-                //   required: 'Ingresa tu correo',
-                // })}
+                {...register('fullName', {
+                  required: 'Ingresa tu nombre',
+                  validate: {
+                    minLength: (value) =>
+                      value.length >= 6 ||
+                      'El nombre debe tener al menos 6 caracteres',
+                    maxLength: (value) =>
+                      value.length <= 100 ||
+                      'El nombre no debe exceder los 100 caracteres',
+                  },
+                })}
               />
             </div>
 
@@ -76,6 +126,9 @@ export default function Signup() {
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
                 {...register('password', {
                   required: 'Ingresa tu contraseña',
+                  validate: (value) =>
+                    /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*_])/.test(value) ||
+                    'La contraseña debe contener al menos una letra mayúscula, un número y un carácter especial',
                 })}
               />
             </div>
@@ -97,7 +150,7 @@ export default function Signup() {
 
             <div>
               <label htmlFor="username" className="inline-block mb-1">
-                Nombre de Usuario
+                Nickname
               </label>
               <input
                 type="text"
@@ -105,10 +158,18 @@ export default function Signup() {
                 placeholder="Ingresa tu nombre de usuario"
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
                 {...register('username', {
-                  required: 'El nombre de usuario es obligatorio',
+                  required: 'Ingresa tu nickname',
                   validate: (value) =>
                     !/\s/.test(value) ||
                     'No se permiten espacios en el nombre de usuario',
+                  minLength: {
+                    value: 6,
+                    message: 'El nickname debe tener al menos 6 caracteres',
+                  },
+                  maxLength: {
+                    value: 25,
+                    message: 'El nickname no debe exceder los 25 caracteres',
+                  },
                 })}
                 onChange={handleUsernameChange}
               />

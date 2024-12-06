@@ -31,7 +31,7 @@ export default function Login() {
       navigate('/profile');
     } else {
       showToast({
-        text: 'Error al iniciar sesión',
+        text: 'Credenciales inválidas',
         color: 'error',
       });
     }
