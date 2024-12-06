@@ -104,7 +104,10 @@ export default function UploadContentForm() {
       onSubmit={handleSubmit(onSubmit, onErrors)}
     >
       <div>
-        <label className="inline-flex items-center cursor-pointer gap-3">
+        <label
+          className="inline-flex items-center cursor-pointer gap-3"
+          htmlFor="is-registered"
+        >
           <span
             className={`font-medium ${
               isRegistered ? 'text-gray-900' : 'text-gray-400'
@@ -139,6 +142,7 @@ export default function UploadContentForm() {
           <input
             type="text"
             value={state.currentCategory ? state.currentCategory._id : ''}
+            id="categories"
             hidden
             {...register('categoryId', {
               required: !isRegistered ? 'Selecciona la categoría' : false,
@@ -158,6 +162,7 @@ export default function UploadContentForm() {
               <LabelSelect labels={filteredList} setLabelId={setLabelId} />
               <input
                 type="text"
+                id="label"
                 value={labelId}
                 hidden
                 {...register('labelId', {
