@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { Header, Navbar } from './components';
 import {
   Home,
+  Contribute,
   Upload,
+  Moderate,
   Login,
   Profile,
   Signup,
@@ -39,14 +41,24 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route
-            path="/upload"
-            element={
-              <ProtectedRoute>
-                <Upload />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/contribute" element={<Contribute />}>
+            <Route
+              path="upload"
+              element={
+                <ProtectedRoute>
+                  <Upload />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="moderate"
+              element={
+                <ProtectedRoute>
+                  <Moderate />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route

@@ -5,20 +5,19 @@ import '../assets/styles/Navbar.css';
 
 export default function Navbar() {
   const { authToken } = useContext(AuthContext);
-
   const location = useLocation();
 
-  const isActive = (path: string) =>
+  const isPathActive = (path: string) =>
     location.pathname === path ? 'active' : '';
 
   return (
-    <nav className="bg-purple-200 rounded-lg p-1">
+    <nav className="main-nav bg-purple-200 rounded-lg p-1">
       <ul className="font-medium flex text-center text-gray-400 gap-1">
         <li className="flex-1 flex">
           <Link
-            className={`${isActive(
+            className={`${isPathActive(
               '/'
-            )}  py-1  h-full w-full rounded-md transition-colors`}
+            )}  py-1 h-full w-full rounded-md transition-colors`}
             to="/"
           >
             Buscar
@@ -26,10 +25,11 @@ export default function Navbar() {
         </li>
         <li className="flex-1 flex">
           <Link
-            className={`${isActive(
-              '/upload'
-            )}  py-1  h-full w-full rounded-md transition-colors`}
-            to="/upload"
+            className={`${
+              isPathActive('/contribute/upload') ||
+              isPathActive('/contribute/moderate')
+            }  py-1  h-full w-full rounded-md transition-colors`}
+            to="/contribute/upload"
           >
             Contribuir
           </Link>
@@ -37,7 +37,7 @@ export default function Navbar() {
         <li className="flex-1 flex">
           {authToken ? (
             <Link
-              className={`${isActive(
+              className={`${isPathActive(
                 '/profile'
               )}  py-1  h-full w-full rounded-md transition-colors`}
               to="/profile"
@@ -47,7 +47,7 @@ export default function Navbar() {
           ) : (
             <Link
               className={`${
-                isActive('/login') || isActive('/signup')
+                isPathActive('/login') || isPathActive('/signup')
               } py-1 h-full w-full rounded-md transition-colors`}
               to="/login"
             >

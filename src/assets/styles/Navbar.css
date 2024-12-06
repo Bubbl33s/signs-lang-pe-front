@@ -3,7 +3,7 @@
   background-color: rgb(249 250 251 / 1);
 }
 
-li > *:not(.active):hover {
+.main-nav li > *:not(.active):hover {
   color: rgb(0 0 0 / 0.6);
   background-color: #d8b4fe;
 }
