@@ -1,4 +1,4 @@
-import { CSSProperties, useMemo, useState, useCallback } from 'react';
+import { CSSProperties, useMemo, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
 
 const baseStyle: CSSProperties = {
@@ -31,11 +31,14 @@ const rejectStyle = {
   backgroundColor: '#ffa8b9',
 };
 
-export default function DragDrop() {
-  const [file, setFile] = useState<string | null>(null);
+type DragDropProps = {
+  file: File | null;
+  setFile: (file: File | null) => void;
+};
 
+export default function DragDrop({ file, setFile }: DragDropProps) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
-    setFile(URL.createObjectURL(acceptedFiles[0]));
+    setFile(acceptedFiles[0]);
   }, []);
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragReject } =
@@ -66,7 +69,10 @@ export default function DragDrop() {
 
       {file && (
         <div className="h-full flex flex-col justify-between items-center">
-          <img src={file} className="h-52 object-contain" />
+          <img
+            src={URL.createObjectURL(file)}
+            className="h-52 object-contain"
+          />
 
           <div className="flex gap-2">
             <button

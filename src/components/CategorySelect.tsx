@@ -1,17 +1,19 @@
 import '../assets/styles/CategorySelect.css';
 import useSigns from '../hooks/useSigns';
 
+type CategorySelectProps = {
+  defaultText?: string;
+};
+
 export default function CategorySelect({
   defaultText = 'Todas las categorías',
-}: {
-  defaultText?: string;
-}) {
+}: CategorySelectProps) {
   const { state, dispatch } = useSigns();
 
   return (
     <div className="flex gap-1">
       <select
-        id="categories"
+        id="category-id"
         className="bg-gray-50 border border-purple-400 text-gray-900 text-sm rounded-md focus:ring-purple-500 focus:border-purple-500 block w-full p-2"
         onChange={(e) =>
           dispatch({
