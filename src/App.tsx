@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router';
 import { Header, Navbar } from './components';
-import { Home, Upload, Login, Profile, Signup } from './pages';
+import { Home, Upload, Login, Profile, Signup, ProtectedRoute } from './pages';
 import useSigns from './hooks/useSigns';
 import { useEffect } from 'react';
 import { LabelService } from './services/labelService';
@@ -31,10 +31,24 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/upload" element={<Upload />} />
+          <Route
+            path="/upload"
+            element={
+              <ProtectedRoute>
+                <Upload />
+              </ProtectedRoute>
+            }
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </div>
