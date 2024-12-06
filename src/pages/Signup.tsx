@@ -1,6 +1,29 @@
+import { useContext } from 'react';
+import { useForm } from 'react-hook-form';
+import { AuthContext } from '../context/AuthContext';
+
 import { useNavigate, Link } from 'react-router';
 
+type FormData = {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  username: string;
+  isDeafMute: boolean;
+  knowsSignLanguage: boolean;
+};
+
 export default function Signup() {
+  const { login } = useContext(AuthContext);
+  const { register, handleSubmit, setValue, reset } = useForm<FormData>();
+  const navigate = useNavigate();
+
+  const handleUsernameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(/\s/g, '');
+    setValue('username', value);
+  };
+
   return (
     <main>
       <div className="w-full">
@@ -36,9 +59,9 @@ export default function Signup() {
                 id="email"
                 placeholder="Ingresa tu correo"
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
-                // {...register('email', {
-                //   required: 'Ingresa tu correo',
-                // })}
+                {...register('email', {
+                  required: 'Ingresa tu correo',
+                })}
               />
             </div>
 
@@ -51,9 +74,9 @@ export default function Signup() {
                 id="password"
                 placeholder="Ingresa tu contraseña"
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
-                // {...register('password', {
-                //   required: 'Ingresa tu contraseña',
-                // })}
+                {...register('password', {
+                  required: 'Ingresa tu contraseña',
+                })}
               />
             </div>
 
@@ -66,9 +89,9 @@ export default function Signup() {
                 id="password-confirm"
                 placeholder="Confirma tu contraseña"
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
-                // {...register('passwordConfirm', {
-                //   required: 'Ingresa tu contraseña',
-                // })}
+                {...register('passwordConfirm', {
+                  required: 'Confirma tu contraseña',
+                })}
               />
             </div>
 
@@ -81,9 +104,13 @@ export default function Signup() {
                 id="username"
                 placeholder="Ingresa tu nombre de usuario"
                 className="border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
-                // {...register('username', {
-                //   required: 'Ingresa tu nombre de usuario',
-                // })}
+                {...register('username', {
+                  required: 'El nombre de usuario es obligatorio',
+                  validate: (value) =>
+                    !/\s/.test(value) ||
+                    'No se permiten espacios en el nombre de usuario',
+                })}
+                onChange={handleUsernameChange}
               />
             </div>
 
@@ -93,9 +120,7 @@ export default function Signup() {
                   type="checkbox"
                   id="isDeafMute"
                   className="accent-purple-500"
-                  // {...register('isDeafMute', {
-                  //   required: 'Ingresa tu contraseña',
-                  // })}
+                  {...register('isDeafMute')}
                 />
                 <label htmlFor="isDeafMute" className="mt-[3px]">
                   Soy una persona sordo-muda
@@ -107,9 +132,7 @@ export default function Signup() {
                   type="checkbox"
                   id="knowsSignLanguage"
                   className="accent-purple-500"
-                  // {...register('knowsSignLanguage', {
-                  //   required: 'Ingresa tu contraseña',
-                  // })}
+                  {...register('knowsSignLanguage')}
                 />
                 <label htmlFor="knowsSignLanguage" className="mt-[3px]">
                   Conozco el lenguaje de señas
