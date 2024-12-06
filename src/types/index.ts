@@ -27,3 +27,15 @@ export type Category = {
   createdAt: string;
   __v: number;
 };
+
+export type User = {
+  _id: string;
+  username: string;
+  fullName: string;
+  email: string;
+  password: string;
+  isDeafMute: boolean;
+  role: string;
+  createdAt: string;
+  __v: number;
+};

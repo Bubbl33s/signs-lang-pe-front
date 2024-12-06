@@ -1,20 +1,30 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useSigns from '../hooks/useSigns';
+import { useContext } from 'react';
+import { AuthContext } from '../context/AuthContext';
 import DragDrop from './DragDrop';
 import CategorySelect from './CategorySelect';
 import LabelSelect from './LabelSelect';
 import { ContentService } from '../services/contentService';
 import { showToast } from '../helpers/toastify';
+import { onErrors } from '../helpers/onErrors';
 import 'toastify-js/src/toastify.css';
 import '../assets/styles/Toastify.css';
 
+type FormData = {
+  categoryId?: string;
+  labelId?: string;
+  labelName?: string;
+};
+
 export default function UploadContentForm() {
-  const { register, handleSubmit, setValue, reset } = useForm();
+  const { register, handleSubmit, setValue, reset } = useForm<FormData>();
   const [isRegistered, setIsRegistered] = useState(true);
   const { state } = useSigns();
-  const [filteredList, setFilteredList] = useState(state.signsList);
+  const { user } = useContext(AuthContext);
 
+  const [filteredList, setFilteredList] = useState(state.signsList);
   const [labelId, setLabelId] = useState('');
   const [file, setFile] = useState<File | null>(null);
 
@@ -40,13 +50,19 @@ export default function UploadContentForm() {
     }
   });
 
-  const onSubmit = async (data: any) => {
-    console.log('Form sent');
-    console.log(data);
-
+  const onSubmit = async (data: FormData) => {
     if (!file) {
       showToast({
         text: 'Sube una imagen',
+        color: 'error',
+      });
+
+      return;
+    }
+
+    if (!user?._id) {
+      showToast({
+        text: 'Sesión no iniciada',
         color: 'error',
       });
 
@@ -59,24 +75,25 @@ export default function UploadContentForm() {
       response = await ContentService.postContent({
         file,
         labelId: data.labelId,
-        contributorId: '674a14e861abe6c6fceff19a',
+        contributorId: user._id,
       });
     } else {
       response = await ContentService.postContent({
         file,
         categoryId: data.categoryId,
         labelName: data.labelName,
-        contributorId: '674a14e861abe6c6fceff19a',
+        contributorId: user._id,
       });
     }
 
-    if (response.code === 200 || response.code === 201) {
+    if (response?.status === 200 || response?.status === 201) {
       showToast({
         text: 'Imagen cargada',
         color: 'success',
       });
 
       reset();
+      setFile(null);
     } else {
       showToast({
         text: 'Error al cargar la imagen',
@@ -85,26 +102,16 @@ export default function UploadContentForm() {
     }
   };
 
-  const onErrors = (errors: any) => {
-    console.log('error');
-    console.log(errors);
-
-    const firstErrorMessage = (Object.values(errors)[0] as { message: string })
-      .message;
-
-    showToast({
-      text: firstErrorMessage,
-      color: 'error',
-    });
-  };
-
   return (
     <form
       className="space-y-3 divide-y-2 divide-purple-200"
       onSubmit={handleSubmit(onSubmit, onErrors)}
     >
-      <div>
-        <label className="inline-flex items-center cursor-pointer gap-3">
+      <div className="flex justify-center">
+        <label
+          className="inline-flex items-center cursor-pointer gap-3 mx-auto"
+          htmlFor="is-registered"
+        >
           <span
             className={`font-medium ${
               isRegistered ? 'text-gray-900' : 'text-gray-400'
@@ -132,13 +139,14 @@ export default function UploadContentForm() {
 
       <div className="pt-3">
         <div className="mb-3">
-          <label htmlFor="categories" className="block mb-1">
+          <label htmlFor="categories" className="inline-block mb-1">
             Categorías
           </label>
           <CategorySelect defaultText="Selecciona una categoría" />
           <input
             type="text"
             value={state.currentCategory ? state.currentCategory._id : ''}
+            id="categories"
             hidden
             {...register('categoryId', {
               required: !isRegistered ? 'Selecciona la categoría' : false,
@@ -149,7 +157,7 @@ export default function UploadContentForm() {
         <div>
           <label
             htmlFor={isRegistered ? 'label' : 'label-name'}
-            className="block mb-1"
+            className="inline-block  mb-1"
           >
             Palabra
           </label>
@@ -158,6 +166,7 @@ export default function UploadContentForm() {
               <LabelSelect labels={filteredList} setLabelId={setLabelId} />
               <input
                 type="text"
+                id="label"
                 value={labelId}
                 hidden
                 {...register('labelId', {

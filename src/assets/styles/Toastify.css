@@ -1,3 +1,9 @@
 .toastify {
   font-size: 10px !important;
 }
+
+@media (min-width: 768px) {
+  .toastify {
+    font-size: 14px !important;
+  }
+}
