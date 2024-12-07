@@ -53,7 +53,7 @@ function App() {
           <Route path="upload" element={<Upload />} />
           <Route path="moderate" element={<Moderate />}>
             <Route path="pick" element={<ModeratePick />} />
-            <Route path="label" element={<ModerateLabel />} />
+            <Route path="label/:id" element={<ModerateLabel />} />
           </Route>
         </Route>
         <Route path="/login" element={<Login />} />

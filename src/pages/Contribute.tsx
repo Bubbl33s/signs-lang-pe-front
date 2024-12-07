@@ -6,7 +6,7 @@ export default function Contribute() {
   const location = useLocation();
 
   const isPathActive = (path: string) =>
-    location.pathname === path ? 'active-contribute' : '';
+    location.pathname.startsWith(path) ? 'active-contribute' : '';
 
   return (
     <main className="overflow-hidden">
