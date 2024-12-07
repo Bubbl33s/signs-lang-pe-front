@@ -39,4 +39,16 @@ export const ContentService = {
       console.error('Error posting content', error);
     }
   },
+
+  async getUnverifiedContentsByLabelId(labelId: string) {
+    try {
+      const response = await apiClientMultipart.get(
+        `/contents/label/${labelId}/unverified`
+      );
+
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching contents', error);
+    }
+  },
 };

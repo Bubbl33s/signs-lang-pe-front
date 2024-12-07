@@ -10,4 +10,14 @@ export const LabelService = {
       console.error('Error fetching labels', error);
     }
   },
+
+  async getLabel(id: string) {
+    try {
+      const response = await apiClient.get(`/labels/${id}`);
+
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching label', error);
+    }
+  },
 };
