@@ -7,6 +7,7 @@ import DragDrop from '../components/DragDrop';
 import CategorySelect from '../components/CategorySelect';
 import LabelSelect from '../components/LabelSelect';
 import { ContentService } from '../services/contentService';
+import { LabelService } from '../services/labelService';
 import { showToast } from '../helpers/toastify';
 import { onErrors } from '../helpers/onErrors';
 import 'toastify-js/src/toastify.css';
@@ -74,6 +75,7 @@ export default function Upload() {
     }
 
     let response;
+    let updateLabels = false;
 
     if (isRegistered) {
       response = await ContentService.postContent({
@@ -88,6 +90,8 @@ export default function Upload() {
         labelName: data.labelName,
         contributorId: user._id,
       });
+
+      updateLabels = true;
     }
 
     if (response?.status === 200 || response?.status === 201) {
@@ -98,6 +102,11 @@ export default function Upload() {
 
       reset();
       setFile(null);
+
+      if (updateLabels) {
+        const labels = await LabelService.getSigns();
+        dispatch({ type: 'set-signs-list', payload: labels });
+      }
     } else {
       showToast({
         text: 'Error al cargar la imagen',

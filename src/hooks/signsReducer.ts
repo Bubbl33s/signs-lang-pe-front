@@ -21,13 +21,18 @@ export type SignsState = {
 };
 
 export const initialState: SignsState = {
-  signsList: [],
+  signsList: JSON.parse(localStorage.getItem('signsList') || '[]'),
   categories: [],
   currentCategory: null,
 };
 
 export const signsReducer = (state: SignsState, action: SignsActions) => {
   if (action.type === 'set-signs-list') {
+    const MAX_SIGNS_LIST_SIZE = 100;
+    const limitedSignsList = action.payload.slice(0, MAX_SIGNS_LIST_SIZE);
+
+    localStorage.setItem('signsList', JSON.stringify(limitedSignsList));
+
     return {
       ...state,
       signsList: action.payload,
