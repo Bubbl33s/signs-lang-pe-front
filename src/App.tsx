@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router';
+import { Routes, Route } from 'react-router';
 import { Header, Navbar } from './components';
 import {
   Home,
@@ -32,40 +32,38 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-100 to-green-100 py-3 px-4 flex flex-col">
-      <Router>
-        <div className="mb-2">
-          <Header />
-        </div>
-        <div className="mb-5">
-          <Navbar />
-        </div>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/contribute"
-            element={
-              <ProtectedRoute>
-                <Contribute />
-              </ProtectedRoute>
-            }
-          >
-            <Route path="upload" element={<Upload />} />
-            <Route path="moderate" element={<Moderate />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute>
-                <Profile />
-              </ProtectedRoute>
-            }
-          />
+      <div className="mb-2">
+        <Header />
+      </div>
+      <div className="mb-5">
+        <Navbar />
+      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/contribute"
+          element={
+            <ProtectedRoute>
+              <Contribute />
+            </ProtectedRoute>
+          }
+        >
+          <Route path="upload" element={<Upload />} />
+          <Route path="moderate" element={<Moderate />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
 
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </div>
   );
 }
