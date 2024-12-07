@@ -73,6 +73,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
       '/profile',
     ];
 
+    const currentTime = Date.now();
+    const storedExpirationTime = localStorage.getItem('expirationTime');
+
+    let showToastMessage = false;
+
+    if (
+      storedExpirationTime &&
+      currentTime > parseInt(storedExpirationTime, 10)
+    ) {
+      showToastMessage = true;
+    }
+
     localStorage.removeItem('authTokenSignsApp');
     localStorage.removeItem('userSignsApp');
     localStorage.removeItem('expirationTime');
@@ -81,13 +93,15 @@ export function AuthProvider({ children }: AuthProviderProps) {
     setAxiosClientAuthToken(null);
     setUser(null);
 
-    showToast({
-      text: 'Sesión caducada',
-      color: 'info',
-    });
-
     if (restrictedPaths.includes(currentPath)) {
       navigate('/login');
+    }
+
+    if (showToastMessage) {
+      showToast({
+        text: 'Sesión caducada',
+        color: 'info',
+      });
     }
   };
 

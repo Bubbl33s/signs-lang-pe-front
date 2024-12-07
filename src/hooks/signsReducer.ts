@@ -28,7 +28,7 @@ export const initialState: SignsState = {
 
 export const signsReducer = (state: SignsState, action: SignsActions) => {
   if (action.type === 'set-signs-list') {
-    const MAX_SIGNS_LIST_SIZE = 100;
+    const MAX_SIGNS_LIST_SIZE = 30;
     const limitedSignsList = action.payload.slice(0, MAX_SIGNS_LIST_SIZE);
 
     localStorage.setItem('signsList', JSON.stringify(limitedSignsList));

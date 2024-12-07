@@ -5,6 +5,8 @@ import {
   Contribute,
   Upload,
   Moderate,
+  ModeratePick,
+  ModerateLabel,
   Login,
   Profile,
   Signup,
@@ -49,7 +51,10 @@ function App() {
           }
         >
           <Route path="upload" element={<Upload />} />
-          <Route path="moderate" element={<Moderate />} />
+          <Route path="moderate" element={<Moderate />}>
+            <Route path="pick" element={<ModeratePick />} />
+            <Route path="label" element={<ModerateLabel />} />
+          </Route>
         </Route>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />

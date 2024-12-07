@@ -10,8 +10,8 @@ export default function Contribute() {
 
   return (
     <main className="overflow-hidden">
-      <nav className="contriubute-nav bg-purple-600 text-white rounded-t-lg p-1">
-        <ul className="font-bold text-base flex text-center">
+      <nav className="contribute-nav bg-purple-600 text-white rounded-t-lg p-1">
+        <ul className="font-bold text-base flex text-center gap-1">
           <li className="flex-1 flex">
             <Link
               to={'/contribute/upload'}
@@ -24,7 +24,7 @@ export default function Contribute() {
           </li>
           <li className="flex-1 flex">
             <Link
-              to={'/contribute/moderate'}
+              to={'/contribute/moderate/pick'}
               className={`${isPathActive(
                 '/contribute/moderate'
               )} py-1 h-full w-full rounded-md`}
