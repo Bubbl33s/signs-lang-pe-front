@@ -41,23 +41,16 @@ function App() {
         </div>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/contribute" element={<Contribute />}>
-            <Route
-              path="upload"
-              element={
-                <ProtectedRoute>
-                  <Upload />
-                </ProtectedRoute>
-              }
-            />
-            <Route
-              path="moderate"
-              element={
-                <ProtectedRoute>
-                  <Moderate />
-                </ProtectedRoute>
-              }
-            />
+          <Route
+            path="/contribute"
+            element={
+              <ProtectedRoute>
+                <Contribute />
+              </ProtectedRoute>
+            }
+          >
+            <Route path="upload" element={<Upload />} />
+            <Route path="moderate" element={<Moderate />} />
           </Route>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

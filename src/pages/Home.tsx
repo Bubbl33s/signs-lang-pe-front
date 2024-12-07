@@ -1,9 +1,9 @@
-import { useMemo } from 'react';
+import { useMemo, useEffect } from 'react';
 import { ResultCard, CategorySelect } from '../components';
 import useSigns from '../hooks/useSigns';
 
 export default function Home() {
-  const { state } = useSigns();
+  const { state, dispatch } = useSigns();
   const filteredList = useMemo(
     () =>
       state.signsList.filter((sign) =>
@@ -13,6 +13,10 @@ export default function Home() {
       ),
     [state.currentCategory, state.signsList]
   );
+
+  useEffect(() => {
+    dispatch({ type: 'set-current-category', payload: null });
+  }, []);
 
   return (
     <main>

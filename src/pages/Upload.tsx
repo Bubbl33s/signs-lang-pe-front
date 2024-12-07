@@ -21,7 +21,7 @@ type FormData = {
 export default function Upload() {
   const { register, handleSubmit, setValue, reset } = useForm<FormData>();
   const [isRegistered, setIsRegistered] = useState(true);
-  const { state } = useSigns();
+  const { state, dispatch } = useSigns();
   const { user } = useContext(AuthContext);
 
   const [filteredList, setFilteredList] = useState(state.signsList);
@@ -49,6 +49,10 @@ export default function Upload() {
       setValue('labelId', labelId);
     }
   });
+
+  useEffect(() => {
+    dispatch({ type: 'set-current-category', payload: null });
+  }, []);
 
   const onSubmit = async (data: FormData) => {
     if (!file) {
