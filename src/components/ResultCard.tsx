@@ -40,7 +40,7 @@ export default function ResultCard({
               <span> {reliability}%</span>
             </p>
             <p className="text-gray-600">
-              {verifiedCount} {verifiedCount === 1 ? 'aporte' : 'aportes'}
+              {`${verifiedCount} ${verifiedCount === 1 ? 'aporte' : 'aportes'}`}
             </p>
           </div>
         </footer>
