@@ -23,34 +23,46 @@ export default function SearchSigns() {
   return (
     <main className="max-w-xl mx-auto md:container">
       <section className="rounded-lg bg-white overflow-hidden">
-        <header className="bg-purple-600 text-white p-5">
-          <h2 className="font-semibold text-2xl mb-1">Buscar Señas</h2>
+        <header className="bg-purple-600 text-white p-3 sm:p-5">
+          <h2 className="font-semibold text-xl mb-1 sm:text-2xl">
+            Buscar Señas
+          </h2>
           <p className="text-sm">
             Encuentra imágenes de señas para palabras en la lengua de señas
             peruana.
           </p>
         </header>
 
-        <div className="p-5 rounded-b-lg border border-purple-400 border-t-0">
-          <div className="mb-4 md:flex md:items-start md:gap-5">
-            <input
-              type="text"
-              placeholder="Buscar palabra..."
-              className="mb-2 border border-purple-400 rounded-md px-2 py-1 w-full h-[37px] md:flex-1"
-            />
+        <div className="p-5 rounded-b-lg border border-purple-400 border-t-0 lg:flex lg:gap-8">
+          <div className="mb-4 md:flex md:items-start md:gap-5 lg:flex-col lg:gap-0">
+            <div className="md:flex-1 lg:flex-none lg:w-full">
+              <label htmlFor="word" className="mb-1 block">
+                Palabra
+              </label>
+              <input
+                type="text"
+                id="word"
+                placeholder="Buscar palabra..."
+                className="mb-2 border border-purple-400 rounded-md px-2 py-1 w-full h-[37px]"
+              />
+            </div>
 
-            <div className="flex-1">
-              <CategorySelect />
+            <div className="flex-1 lg:flex-none">
+              <label htmlFor="categories">Categoría</label>
+              <div className="mt-1">
+                <CategorySelect />
+              </div>
             </div>
           </div>
+
           {filteredList.length > 0 ? (
-            <section className="space-y-4">
+            <section className="space-y-4 lg:flex-1 lg:grid lg:grid-cols-2 lg:space-y-0 lg:gap-3 2xl:grid-cols-3">
               {filteredList.map((sign) => (
                 <ResultCard key={sign._id} {...sign} />
               ))}
             </section>
           ) : (
-            <div className="py-3 flex flex-col justify-center items-center gap-3">
+            <div className="py-3 flex flex-col justify-center items-center gap-3 lg:flex-1">
               <p className="text-center text-gray-500">
                 Aún no se han hecho aportes para esta categoría. ¡Sé el primero
                 en contribuir!
