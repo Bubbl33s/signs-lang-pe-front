@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate, Link } from 'react-router';
+import { useParams, Link } from 'react-router';
+import { ArrowBarLeft } from 'react-bootstrap-icons';
 import useSigns from '../hooks/useSigns';
 import { ContentService } from '../services/contentService';
 import { Label, Content } from '../types';
@@ -9,8 +10,6 @@ export default function ModerateLabel() {
   const { state } = useSigns();
   const [label, setLabel] = useState<Label>();
   const [contents, setContents] = useState<Content[]>([]);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (id) {
@@ -24,9 +23,15 @@ export default function ModerateLabel() {
 
   return (
     <div>
-      <header>
-        <h3>{label?.name}</h3>
-        <Link to={'../pick'}>Volver</Link>
+      <header className="flex justify-between items-end mb-4">
+        <h3 className="text-xl font-bold">{label?.name}</h3>
+        <Link
+          to={'../pick'}
+          className="flex items-center gap-1 bg-purple-300 border border-purple-500 rounded-md py-1 px-3 text-sm font-semibold hover:bg-purple-500 hover:text-white transition-colors"
+        >
+          <ArrowBarLeft />
+          <p>Volver</p>
+        </Link>
       </header>
 
       <ul>
