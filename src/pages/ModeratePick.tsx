@@ -1,20 +1,25 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router';
 import useSigns from '../hooks/useSigns';
 import { LabelService } from '../services/labelService';
+import { LoadingSpinner } from '../components';
 
 export default function ModeratePick() {
   const { state, dispatch } = useSigns();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
       const labels = await LabelService.getSigns();
-
       dispatch({ type: 'set-signs-list', payload: labels });
+
+      setLoading(false);
     })();
   }, [dispatch]);
 
-  return (
+  return loading ? (
+    <LoadingSpinner />
+  ) : (
     <ul className="space-y-2">
       {state.signsList.map(
         (sign) =>
