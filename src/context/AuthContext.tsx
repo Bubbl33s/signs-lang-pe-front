@@ -19,7 +19,7 @@ export const AuthContext = createContext<AuthContextProps>(null!);
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [authToken, setAuthToken] = useState<string | null>(null);
-  const [expirationTime, setExpirationTime] = useState<number | null>(null);
+  const [_, setExpirationTime] = useState<number | null>(null);
   const [user, setUser] = useState<User | null>(null);
 
   const navigate = useNavigate();
