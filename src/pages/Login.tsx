@@ -38,7 +38,7 @@ export default function Login() {
   };
 
   return (
-    <main>
+    <main className="mx-auto container max-w-xl">
       <div className="w-full">
         <header className="bg-purple-600 text-white rounded-t-lg py-2">
           <h3 className="text-center text-xl font-bold">Iniciar Sesión</h3>
