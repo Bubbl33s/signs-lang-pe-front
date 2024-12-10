@@ -56,7 +56,7 @@ export default function SearchSigns() {
           </div>
 
           {filteredList.length > 0 ? (
-            <section className="space-y-4 lg:flex-1 lg:grid lg:grid-cols-2 lg:space-y-0 lg:gap-3 2xl:grid-cols-3">
+            <section className="space-y-4 sm:grid sm:grid-cols-2 sm:space-y-0 sm:gap-3 md:flex-1 2xl:grid-cols-3">
               {filteredList.map((sign) => (
                 <ResultCard key={sign._id} {...sign} />
               ))}
