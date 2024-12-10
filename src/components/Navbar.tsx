@@ -19,7 +19,7 @@ export default function Navbar() {
         <li className="flex-1 flex">
           <Link
             className={`${
-              isPathActive('/', true) ? 'active' : ''
+              isPathActive('/', true) || isPathActive('/search') ? 'active' : ''
             } py-1 h-full w-full rounded-md transition-colors`}
             to="/"
           >
@@ -44,7 +44,7 @@ export default function Navbar() {
               } py-1 h-full w-full rounded-md transition-colors`}
               to="/profile"
             >
-              Perfil
+              Cuenta
             </Link>
           ) : (
             <Link

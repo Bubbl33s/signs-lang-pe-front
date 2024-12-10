@@ -150,7 +150,7 @@ export default function ModerateLabel() {
           {initialLoading ? (
             <LoadingSpinner />
           ) : (
-            <p className="my-3">
+            <p className="my-3 text-center">
               No hay contenidos pendientes de verificación.
             </p>
           )}

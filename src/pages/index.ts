@@ -7,6 +7,8 @@ import ModerateLabel from './ModerateLabel';
 import Login from './Login';
 import Profile from './Profile';
 import Signup from './Signup';
+import SearchSigns from './SearchSigns';
+import SignDetail from './SignDetail';
 import ProtectedRoute from './ProtectedRoute';
 import NotFound from './NotFound';
 
@@ -20,6 +22,8 @@ export {
   Login,
   Profile,
   Signup,
+  SearchSigns,
+  SignDetail,
   ProtectedRoute,
   NotFound,
 };

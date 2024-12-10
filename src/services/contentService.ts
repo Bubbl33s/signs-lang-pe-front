@@ -40,6 +40,16 @@ export const ContentService = {
     }
   },
 
+  async getContentsByLabelId(labelId: string) {
+    try {
+      const response = await apiClient.get(`/contents/label/${labelId}`);
+
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching contents', error);
+    }
+  },
+
   async getUnverifiedContentsByLabelId(labelId: string) {
     try {
       const response = await apiClient.get(
