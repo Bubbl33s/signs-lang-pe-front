@@ -37,7 +37,11 @@ export default function ModeratePick() {
               className="rounded-lg bg-purple-600 text-white py-2 px-4 flex justify-between items-center text-base hover:bg-purple-300 hover:text-purple-600 hover:cursor-pointer hover:shadow-lg transition-all sm:flex sm:flex-col sm:py-4"
             >
               <h2 className="font-semibold sm:text-xl">{sign.name}</h2>
-              <p>{sign.unverifiedCount} pendientes</p>
+              <p>
+                {`${sign.unverifiedCount} ${
+                  sign.unverifiedCount === 1 ? 'pendiente' : 'pendientes'
+                }`}
+              </p>
             </Link>
           </li>
         ))}
