@@ -16,7 +16,7 @@ export default function SignDetail() {
 
   useEffect(() => {
     if (id) {
-      ContentService.getContentsByLabelId(id).then((data) => {
+      ContentService.getVerifiedContentsByLabelId(id).then((data) => {
         setContents(data);
         setLoading(false);
       });

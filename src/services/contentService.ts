@@ -40,9 +40,11 @@ export const ContentService = {
     }
   },
 
-  async getContentsByLabelId(labelId: string) {
+  async getVerifiedContentsByLabelId(labelId: string) {
     try {
-      const response = await apiClient.get(`/contents/label/${labelId}`);
+      const response = await apiClient.get(
+        `/contents/label/${labelId}/verified`
+      );
 
       return response.data;
     } catch (error) {
