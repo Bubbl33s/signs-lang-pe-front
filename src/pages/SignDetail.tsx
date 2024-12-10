@@ -4,27 +4,40 @@ import useSigns from '../hooks/useSigns';
 import { ContentService } from '../services/contentService';
 import { ArrowBarLeft } from 'react-bootstrap-icons';
 import { Label, Content } from '../types';
+import { LoadingSpinner } from '../components';
 
 export default function SignDetail() {
   const { id } = useParams();
   const { state } = useSigns();
   const [label, setLabel] = useState<Label>();
+  const [category, setCategory] = useState<string>('');
   const [contents, setContents] = useState<Content[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (id) {
-      setLabel(state.signsList.find((label) => label._id === id));
-
       ContentService.getContentsByLabelId(id).then((data) => {
         setContents(data);
+        setLoading(false);
       });
+
+      setLabel(state.signsList.find((label) => label._id === id));
+
+      setCategory(
+        state.categories.find((category) => category._id === label?.categoryId)
+          ?.name || ''
+      );
     }
   }, [id]);
 
   return (
-    <div>
-      <header className="flex justify-between items-center mb-5">
-        <h3 className="text-xl font-bold">{label?.name}</h3>
+    <main className="p-3 pt-0">
+      <header className="flex justify-between items-start mb-5">
+        <div>
+          <h3 className="text-xl font-bold">{label?.name}</h3>
+          <p className="text-sm text-gray-700">{category}</p>
+        </div>
+
         <Link
           to={'/'}
           className="flex items-center gap-1 bg-purple-300 border border-purple-500 rounded-md py-2 px-3 text-sm font-semibold hover:bg-purple-500 hover:text-white transition-colors"
@@ -33,6 +46,23 @@ export default function SignDetail() {
           <p>Volver</p>
         </Link>
       </header>
-    </div>
+
+      <section>
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <div className="grid gap-4">
+            {contents.map((content) => (
+              <img
+                key={content._id}
+                src={content.url}
+                alt={label?.name}
+                className="rounded-lg"
+              />
+            ))}
+          </div>
+        )}
+      </section>
+    </main>
   );
 }
