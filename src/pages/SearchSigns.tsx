@@ -34,7 +34,7 @@ export default function SearchSigns() {
         </header>
 
         <div className="p-5 rounded-b-lg border border-purple-400 border-t-0 lg:flex lg:gap-8">
-          <div className="mb-4 md:flex md:items-start md:gap-5 lg:flex-col lg:gap-0">
+          <div className="mb-4 md:flex md:items-start md:gap-5 lg:flex-col lg:gap-2">
             <div className="md:flex-1 lg:flex-none lg:w-full">
               <label htmlFor="word" className="mb-1 block">
                 Palabra

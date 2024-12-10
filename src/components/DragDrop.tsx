@@ -1,5 +1,6 @@
 import { CSSProperties, useMemo, useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import LoadingSpinner from './LoadingSpinner';
 
 const baseStyle: CSSProperties = {
   flex: 1,
@@ -34,9 +35,10 @@ const rejectStyle = {
 type DragDropProps = {
   file: File | null;
   setFile: (file: File | null) => void;
+  loading: boolean;
 };
 
-export default function DragDrop({ file, setFile }: DragDropProps) {
+export default function DragDrop({ file, setFile, loading }: DragDropProps) {
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFile(acceptedFiles[0]);
   }, []);
@@ -55,7 +57,7 @@ export default function DragDrop({ file, setFile }: DragDropProps) {
   );
 
   return (
-    <div className="flex h-64 items-center justify-center">
+    <div className="flex h-64 items-center justify-center sm:h-80 md:h-96 lg:h-[440px]">
       <div
         className={`${file != null ? 'hidden' : 'flex'} hover:text-gray-900`}
       >
@@ -71,26 +73,34 @@ export default function DragDrop({ file, setFile }: DragDropProps) {
         <div className="h-full flex flex-col justify-between items-center">
           <img
             src={URL.createObjectURL(file)}
-            className="h-52 object-contain"
+            className={`h-52 object-contain sm:h-64 md:h-80 lg:h-96 ${
+              loading && 'blur-sm'
+            }`}
           />
 
-          <div className="flex gap-2">
-            <button
-              className="bg-purple-300 border border-purple-500 rounded-md py-2 px-3 text-sm hover:bg-purple-500 hover:text-white transition-colors"
-              onClick={(e) => {
-                e.preventDefault();
-                setFile(null);
-              }}
-            >
-              Elegir otra imagen
-            </button>
+          {loading ? (
+            <div className="flex gap-2 -mt-5">
+              <LoadingSpinner />
+            </div>
+          ) : (
+            <div className="flex gap-2">
+              <button
+                className="bg-purple-300 border border-purple-500 rounded-md py-2 px-3 text-sm hover:bg-purple-500 hover:text-white transition-colors disabled:opacity-50"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setFile(null);
+                }}
+              >
+                Cambiar imagen
+              </button>
 
-            <input
-              type="submit"
-              value="Subir imagen"
-              className="bg-green-500 rounded-md py-2 px-3 text-sm font-bold text-white border border-green-500 hover:bg-green-300 hover:text-black transition-colors hover:cursor-pointer"
-            />
-          </div>
+              <input
+                type="submit"
+                value="Subir imagen"
+                className="bg-green-500 rounded-md py-2 px-3 text-sm font-bold text-white border border-green-500 hover:bg-green-300 hover:text-black transition-colors hover:cursor-pointer disabled:opacity-50"
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

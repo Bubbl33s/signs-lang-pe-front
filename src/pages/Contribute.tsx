@@ -9,7 +9,7 @@ export default function Contribute() {
     location.pathname.startsWith(path) ? 'active-contribute' : '';
 
   return (
-    <main className="overflow-hidden">
+    <main className="overflow-hidden md:container md:max-w-5xl mx-auto">
       <nav className="contribute-nav bg-purple-600 text-white rounded-t-lg p-1">
         <ul className="font-bold text-base flex text-center gap-1">
           <li className="flex-1 flex">
