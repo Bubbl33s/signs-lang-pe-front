@@ -31,7 +31,7 @@ export default function SignDetail() {
   }, [id]);
 
   return (
-    <main className="p-3 pt-0">
+    <main className="p-3 pt-0 mx-auto md:container md:max-w-4xl">
       <header className="flex justify-between items-start mb-5">
         <div>
           <h3 className="text-xl font-bold">{label?.name}</h3>
@@ -47,7 +47,7 @@ export default function SignDetail() {
         </Link>
       </header>
 
-      <section>
+      <section className="max-h-96">
         {loading ? <LoadingSpinner /> : <Gallery contents={contents} />}
       </section>
     </main>
