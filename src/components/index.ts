@@ -3,7 +3,8 @@ import Navbar from './Navbar';
 import ResultCard from './ResultCard';
 import CategorySelect from './CategorySelect';
 import DragDrop from './DragDrop';
-import UploadContentForm from './UploadContentForm';
+import LoadingSpinner from './LoadingSpinner';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 export {
   Header,
@@ -11,5 +12,6 @@ export {
   ResultCard,
   CategorySelect,
   DragDrop,
-  UploadContentForm,
+  LoadingSpinner,
+  DeleteConfirmationModal,
 };

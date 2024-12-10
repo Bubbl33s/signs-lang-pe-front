@@ -5,6 +5,7 @@ export type Label = {
   reliability: number;
   verified: boolean;
   primaryContent: Content;
+  unverifiedCount: number;
   createdAt: string;
   __v: number;
 };
