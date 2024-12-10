@@ -28,19 +28,21 @@ export default function ModeratePick() {
   return loading ? (
     <LoadingSpinner />
   ) : filteredSigns.length > 0 ? (
-    <ul className="space-y-2">
-      {filteredSigns.map((sign) => (
-        <li key={sign._id}>
-          <Link
-            to={`../label/${sign._id}`}
-            className="rounded-lg bg-purple-600 text-white py-2 px-4 flex justify-between items-center font-semibold text-base hover:bg-purple-300 hover:text-purple-600 hover:cursor-pointer hover:shadow-lg transition-all"
-          >
-            <h2>{sign.name}</h2>
-            <p>{sign.unverifiedCount} pendientes</p>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className="space-y-2 sm:grid sm:grid-cols-2 sm:space-y-0 sm:gap-3 lg:grid-cols-3">
+        {filteredSigns.map((sign) => (
+          <li key={sign._id}>
+            <Link
+              to={`../label/${sign._id}`}
+              className="rounded-lg bg-purple-600 text-white py-2 px-4 flex justify-between items-center text-base hover:bg-purple-300 hover:text-purple-600 hover:cursor-pointer hover:shadow-lg transition-all sm:flex sm:flex-col sm:py-4"
+            >
+              <h2 className="font-semibold sm:text-xl">{sign.name}</h2>
+              <p>{sign.unverifiedCount} pendientes</p>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </div>
   ) : (
     <p className="my-3 text-center">
       No hay etiquetas pendientes de moderación
