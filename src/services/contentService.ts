@@ -1,3 +1,4 @@
+import { get } from 'react-hook-form';
 import { apiClient, apiClientMultipart } from './apiClient';
 
 type PostContent = {
@@ -37,6 +38,16 @@ export const ContentService = {
       }
     } catch (error) {
       console.error('Error posting content', error);
+    }
+  },
+
+  async getContentsByLabelId(labelId: string) {
+    try {
+      const response = await apiClient.get(`/contents/label/${labelId}`);
+
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching contents', error);
     }
   },
 

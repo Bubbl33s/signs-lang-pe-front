@@ -20,7 +20,7 @@ export default function Profile() {
 
   return (
     <div>
-      <p>Perfil</p>
+      <p>Cuenta</p>
       <button
         onClick={onLogout}
         className="bg-purple-300 border border-purple-500 rounded-md py-2 px-3 text-sm hover:bg-purple-500 hover:text-white transition-colors"

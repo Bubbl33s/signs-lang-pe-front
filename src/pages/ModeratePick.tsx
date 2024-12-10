@@ -33,7 +33,7 @@ export default function ModeratePick() {
         <li key={sign._id}>
           <Link
             to={`../label/${sign._id}`}
-            className="rounded-lg bg-purple-600 text-white py-2 px-4 flex justify-between items-center font-semibold text-base hover:bg-purple-300 hover:text-purple-600 hover:cursor-pointer transition-colors"
+            className="rounded-lg bg-purple-600 text-white py-2 px-4 flex justify-between items-center font-semibold text-base hover:bg-purple-300 hover:text-purple-600 hover:cursor-pointer hover:shadow-lg transition-all"
           >
             <h2>{sign.name}</h2>
             <p>{sign.unverifiedCount} pendientes</p>
@@ -42,6 +42,8 @@ export default function ModeratePick() {
       ))}
     </ul>
   ) : (
-    <p className="my-3">No hay etiquetas pendientes de moderación</p>
+    <p className="my-3 text-center">
+      No hay etiquetas pendientes de moderación
+    </p>
   );
 }

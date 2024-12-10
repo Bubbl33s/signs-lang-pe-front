@@ -10,6 +10,8 @@ import {
   Login,
   Profile,
   Signup,
+  SearchSigns,
+  SignDetail,
   ProtectedRoute,
   NotFound,
 } from './pages';
@@ -41,7 +43,10 @@ function App() {
         <Navbar />
       </div>
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />}>
+          <Route path="" element={<SearchSigns />} />
+          <Route path="search/:id" element={<SignDetail />} />
+        </Route>
         <Route
           path="/contribute"
           element={
