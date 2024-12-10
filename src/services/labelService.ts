@@ -3,7 +3,7 @@ import { apiClient } from './apiClient';
 export const LabelService = {
   async getSigns() {
     try {
-      const response = await apiClient.get('/labels/unverified/content');
+      const response = await apiClient.get('/labels/content/count');
 
       return response.data;
     } catch (error) {

@@ -28,6 +28,7 @@ export default function Upload() {
   const [filteredList, setFilteredList] = useState(state.signsList);
   const [labelId, setLabelId] = useState('');
   const [file, setFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setFilteredList(
@@ -74,6 +75,8 @@ export default function Upload() {
       return;
     }
 
+    setLoading(true);
+
     let response;
     let updateLabels = false;
 
@@ -102,6 +105,8 @@ export default function Upload() {
 
       reset();
       setFile(null);
+      setLabelId('');
+      setFilteredList(state.signsList);
 
       if (updateLabels) {
         const labels = await LabelService.getSigns();
@@ -113,11 +118,13 @@ export default function Upload() {
         color: 'error',
       });
     }
+
+    setLoading(false);
   };
 
   return (
     <form
-      className="space-y-3 divide-y-2 divide-purple-200"
+      className="space-y-3 divide-y-2 divide-purple-200 pb-2"
       onSubmit={handleSubmit(onSubmit, onErrors)}
     >
       <div className="flex justify-center">
@@ -135,6 +142,7 @@ export default function Upload() {
           <input
             type="checkbox"
             id="is-registered"
+            disabled={loading}
             value=""
             className="sr-only peer"
             onChange={(e) => setIsRegistered(!e.target.checked)}
@@ -150,8 +158,8 @@ export default function Upload() {
         </label>
       </div>
 
-      <div className="pt-3">
-        <div className="mb-3">
+      <div className="pt-3 md:flex md:items-start md:gap-5">
+        <div className="mb-3 md:flex-1 ">
           <label htmlFor="categories" className="inline-block mb-1">
             Categorías
           </label>
@@ -167,7 +175,7 @@ export default function Upload() {
           />
         </div>
 
-        <div>
+        <div className="md:flex-1 ">
           <label
             htmlFor={isRegistered ? 'label' : 'label-name'}
             className="inline-block  mb-1"
@@ -202,7 +210,7 @@ export default function Upload() {
       </div>
 
       <div className="pt-3">
-        <DragDrop file={file} setFile={setFile} />
+        <DragDrop file={file} setFile={setFile} loading={loading} />
       </div>
     </form>
   );

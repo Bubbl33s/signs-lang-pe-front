@@ -16,7 +16,7 @@ export default function SignDetail() {
 
   useEffect(() => {
     if (id) {
-      ContentService.getContentsByLabelId(id).then((data) => {
+      ContentService.getVerifiedContentsByLabelId(id).then((data) => {
         setContents(data);
         setLoading(false);
       });
@@ -28,14 +28,14 @@ export default function SignDetail() {
           ?.name || ''
       );
     }
-  }, [id]);
+  });
 
   return (
-    <main className="p-3 pt-0">
+    <main className="p-3 pt-0 mx-auto md:container md:max-w-4xl">
       <header className="flex justify-between items-start mb-5">
         <div>
-          <h3 className="text-xl font-bold">{label?.name}</h3>
-          <p className="text-sm text-gray-700">{category}</p>
+          <h3 className="text-xl font-bold md:text-2xl">{label?.name}</h3>
+          <p className="text-sm text-gray-700 md:text-base">{category}</p>
         </div>
 
         <Link

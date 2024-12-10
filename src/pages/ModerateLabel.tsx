@@ -92,7 +92,7 @@ export default function ModerateLabel() {
   return (
     <div>
       <header className="flex justify-between items-center mb-5">
-        <h3 className="text-xl font-bold">{label?.name}</h3>
+        <h3 className="text-xl font-bold sm:text-2xl">{label?.name}</h3>
         <Link
           to={'../pick'}
           className="flex items-center gap-1 bg-purple-300 border border-purple-500 rounded-md py-2 px-3 text-sm font-semibold hover:bg-purple-500 hover:text-white transition-colors"
@@ -122,7 +122,7 @@ export default function ModerateLabel() {
                   <img
                     src={content.url}
                     alt={content.labelId}
-                    className="h-56 rounded-lg shadow-md"
+                    className="h-56 rounded-lg shadow-md sm:h-64 md:h-80 lg:h-96"
                   />
                   <div className="flex gap-2 mt-4">
                     <button
@@ -135,7 +135,7 @@ export default function ModerateLabel() {
                     <button
                       onClick={() => handleValidation(content._id, 'validate')}
                       disabled={loading}
-                      className="text-white bg-purple-500 py-[6px] px-4 rounded-md hover:bg-purple-700 transition-colors"
+                      className="text-white font-bold bg-purple-500 py-[6px] px-4 rounded-md hover:bg-purple-700 transition-colors"
                     >
                       Aceptar
                     </button>

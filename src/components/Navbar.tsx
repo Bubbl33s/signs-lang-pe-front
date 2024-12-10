@@ -14,7 +14,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="main-nav bg-purple-200 rounded-lg p-1">
+    <nav className="main-nav max-w-xl mx-auto bg-purple-200 rounded-lg p-1">
       <ul className="font-medium flex text-center text-gray-400 gap-1">
         <li className="flex-1 flex">
           <Link
