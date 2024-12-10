@@ -4,7 +4,7 @@ import useSigns from '../hooks/useSigns';
 import { ContentService } from '../services/contentService';
 import { ArrowBarLeft } from 'react-bootstrap-icons';
 import { Label, Content } from '../types';
-import { LoadingSpinner } from '../components';
+import { LoadingSpinner, Gallery } from '../components';
 
 export default function SignDetail() {
   const { id } = useParams();
@@ -48,20 +48,7 @@ export default function SignDetail() {
       </header>
 
       <section>
-        {loading ? (
-          <LoadingSpinner />
-        ) : (
-          <div className="grid gap-4">
-            {contents.map((content) => (
-              <img
-                key={content._id}
-                src={content.url}
-                alt={label?.name}
-                className="rounded-lg"
-              />
-            ))}
-          </div>
-        )}
+        {loading ? <LoadingSpinner /> : <Gallery contents={contents} />}
       </section>
     </main>
   );

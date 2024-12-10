@@ -1,4 +1,3 @@
-import { get } from 'react-hook-form';
 import { apiClient, apiClientMultipart } from './apiClient';
 
 type PostContent = {

@@ -5,6 +5,7 @@ import CategorySelect from './CategorySelect';
 import DragDrop from './DragDrop';
 import LoadingSpinner from './LoadingSpinner';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import Gallery from './Gallery';
 
 export {
   Header,
@@ -14,4 +15,5 @@ export {
   DragDrop,
   LoadingSpinner,
   DeleteConfirmationModal,
+  Gallery,
 };
