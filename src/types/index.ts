@@ -36,6 +36,7 @@ export type User = {
   email: string;
   password: string;
   isDeafMute: boolean;
+  knowsSignLanguage: boolean;
   role: string;
   createdAt: string;
   __v: number;
