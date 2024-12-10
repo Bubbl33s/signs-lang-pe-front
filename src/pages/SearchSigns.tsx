@@ -19,7 +19,7 @@ export default function SearchSigns() {
   }, []);
 
   return (
-    <main>
+    <main className="max-w-xl mx-auto">
       <section className="rounded-lg bg-white overflow-hidden">
         <header className="bg-purple-600 text-white p-5">
           <h2 className="font-semibold text-2xl mb-1">Buscar Señas</h2>
