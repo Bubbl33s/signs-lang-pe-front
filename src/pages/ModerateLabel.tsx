@@ -1,3 +1,4 @@
+import DeleteConfirmationModal from '../components/DeleteConfirmationModal';
 import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router';
 import { ArrowBarLeft } from 'react-bootstrap-icons';
@@ -21,6 +22,10 @@ export default function ModerateLabel() {
   const [loading, setLoading] = useState(false);
   const swiperRef = useRef<SwiperCore | null>(null);
 
+  // Estado para el modal
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [contentToDelete, setContentToDelete] = useState<Content | null>(null);
+
   useEffect(() => {
     if (id) {
       setLabel(state.signsList.find((label) => label._id === id));
@@ -31,6 +36,11 @@ export default function ModerateLabel() {
       });
     }
   }, [id]);
+
+  const handleDeleteConfirmation = (content: Content) => {
+    setContentToDelete(content);
+    setIsModalOpen(true);
+  };
 
   const handleValidation = async (
     contentId: string,
@@ -71,6 +81,14 @@ export default function ModerateLabel() {
     }
   };
 
+  const confirmDelete = async () => {
+    if (contentToDelete) {
+      await handleValidation(contentToDelete._id, 'reject');
+      setIsModalOpen(false);
+      setContentToDelete(null);
+    }
+  };
+
   return (
     <div>
       <header className="flex justify-between items-center mb-5">
@@ -108,16 +126,16 @@ export default function ModerateLabel() {
                   />
                   <div className="flex gap-2 mt-4">
                     <button
-                      onClick={() => handleValidation(content._id, 'reject')}
+                      onClick={() => handleDeleteConfirmation(content)}
                       disabled={loading}
-                      className="font-bold bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-700 transition-colors"
+                      className="bg-red-500 text-white py-[6px] px-4 rounded-md hover:bg-red-700 transition-colors"
                     >
                       Rechazar
                     </button>
                     <button
                       onClick={() => handleValidation(content._id, 'validate')}
                       disabled={loading}
-                      className="font-bold bg-green-500 py-2 px-4 rounded-md hover:bg-green-700 transition-colors"
+                      className="text-white bg-purple-500 py-[6px] px-4 rounded-md hover:bg-purple-700 transition-colors"
                     >
                       Aceptar
                     </button>
@@ -137,6 +155,16 @@ export default function ModerateLabel() {
             </p>
           )}
         </div>
+      )}
+
+      {isModalOpen && (
+        <DeleteConfirmationModal
+          isOpen={isModalOpen}
+          onConfirm={confirmDelete}
+          onClose={() => setIsModalOpen(false)}
+          title="Rechazar contenido"
+          message="Al rechazar el contenido, este será eliminado de la plataforma."
+        />
       )}
     </div>
   );
