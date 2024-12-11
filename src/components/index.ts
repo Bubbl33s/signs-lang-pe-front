@@ -10,6 +10,7 @@ import Footer from './Footer';
 import InfoModal from './InfoModal';
 import AboutUs from './AboutUs';
 import HowToContribute from './HowToContribute';
+import Importance from './Importance';
 
 export {
   Header,
@@ -24,4 +25,5 @@ export {
   InfoModal,
   AboutUs,
   HowToContribute,
+  Importance,
 };

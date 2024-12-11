@@ -2,6 +2,7 @@ import { useState } from 'react';
 import InfoModal from './InfoModal';
 import AboutUs from './AboutUs';
 import HowToContribute from './HowToContribute';
+import Importance from './Importance';
 import { HandIndex } from 'react-bootstrap-icons';
 
 export default function Footer() {
@@ -37,11 +38,21 @@ export default function Footer() {
           >
             Sobre este proyecto
           </button>
+
           <button
             onClick={() => openModal('Cómo contribuir', <HowToContribute />)}
             className="font-medium hover:text-purple-200 hover:scale-105 transition-all"
           >
             Cómo contribuir
+          </button>
+
+          <button
+            onClick={() =>
+              openModal('La importancia de contribuir', <Importance />)
+            }
+            className="font-medium hover:text-purple-200 hover:scale-105 transition-all"
+          >
+            La importancia de contribuir
           </button>
         </section>
       </footer>
