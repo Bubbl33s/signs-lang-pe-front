@@ -3,6 +3,7 @@ import InfoModal from './InfoModal';
 import AboutUs from './AboutUs';
 import HowToContribute from './HowToContribute';
 import Importance from './Importance';
+import Scalabilty from './Scalabilty';
 import { HandIndex } from 'react-bootstrap-icons';
 
 export default function Footer() {
@@ -53,6 +54,15 @@ export default function Footer() {
             className="font-medium hover:text-purple-200 hover:scale-105 transition-all"
           >
             La importancia de contribuir
+          </button>
+
+          <button
+            onClick={() =>
+              openModal('La importancia de contribuir', <Scalabilty />)
+            }
+            className="font-medium hover:text-purple-200 hover:scale-105 transition-all"
+          >
+            Escalabilidad
           </button>
         </section>
       </footer>

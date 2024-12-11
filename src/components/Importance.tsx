@@ -1,7 +1,7 @@
 export default function Importance() {
   return (
     <div className="px-4 text-gray-700">
-      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-4 text-center text-purple-600">
+      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 text-center text-purple-600">
         La Importancia de Contribuir
       </h2>
       <p className="text-sm sm:text-base lg:text-lg mb-4">

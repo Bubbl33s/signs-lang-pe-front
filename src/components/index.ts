@@ -11,6 +11,7 @@ import InfoModal from './InfoModal';
 import AboutUs from './AboutUs';
 import HowToContribute from './HowToContribute';
 import Importance from './Importance';
+import Scalabilty from './Scalabilty';
 
 export {
   Header,
@@ -26,4 +27,5 @@ export {
   AboutUs,
   HowToContribute,
   Importance,
+  Scalabilty,
 };
