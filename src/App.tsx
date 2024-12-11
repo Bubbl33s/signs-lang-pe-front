@@ -19,6 +19,7 @@ import useSigns from './hooks/useSigns';
 import { useEffect } from 'react';
 import { LabelService } from './services/labelService';
 import { CategoryService } from './services/categoryService';
+import 'toastify-js/src/toastify.css';
 
 function App() {
   const { dispatch } = useSigns();

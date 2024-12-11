@@ -13,11 +13,11 @@ export default function AboutUs() {
         reconocimiento y la difusión de esta importante herramienta de
         expresión.
       </p>
-      <div>
-        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-2 text-purple-500">
+      <div className="mb-4">
+        <h3 className="text-lg sm:text-xl lg:text-2xl font-semibold mb-3 text-purple-500">
           ¿Qué encontrarás aquí?
         </h3>
-        <ul className="list-disc list-inside space-y-1 mb-3">
+        <ul className="list-disc list-inside space-y-1 ps-2 lg:ps-4">
           <li className="text-sm sm:text-base lg:text-lg">
             <span className="font-medium text-purple-600">
               Buscador de Señales:
