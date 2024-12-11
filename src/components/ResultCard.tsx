@@ -19,7 +19,7 @@ export default function ResultCard({
       state.categories.find((category) => category._id === categoryId)?.name ||
         ''
     );
-  });
+  }, [state.categories, categoryId]);
 
   return (
     <article className="border border-green-300 rounded-lg p-4 hover:cursor-pointer hover:bg-green-50 hover:shadow-lg transition-all">
