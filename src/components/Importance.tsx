@@ -29,6 +29,12 @@ export default function Importance() {
             impacto, ayudando a que más personas puedan beneficiarse y
             participar en esta iniciativa.
           </li>
+          <li className="text-sm sm:text-base lg:text-lg">
+            Seguro observas que la confiabilidad de algunas imágnes es muy baja,
+            esto sucede a que no hay suficiente contenido para ser validado,
+            deben ser mínimo 10 imágenes. Tu aporte es fundamental para mejorar
+            la calidad y confiabilidad.
+          </li>
         </ul>
       </div>
       <div>

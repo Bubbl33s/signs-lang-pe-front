@@ -104,7 +104,10 @@ export default function Upload() {
       reset();
       setFile(null);
       setLabelId('');
+      setIsRegistered(true);
+      setValue('categoryId', '');
       setFilteredList(state.signsList);
+      dispatch({ type: 'set-current-category', payload: null });
 
       if (updateLabels) {
         const labels = await LabelService.getSigns();
