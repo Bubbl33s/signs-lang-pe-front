@@ -19,8 +19,8 @@ export default function Profile() {
   };
 
   return (
-    <main className="px-3 py-1 mx-auto container max-w-xl">
-      <section>
+    <main className="mx-auto container max-w-xl">
+      <section className="px-3 py-1 ">
         <header className="flex flex-wrap justify-between items-start gap-2">
           <div className="overflow-hidden">
             <h1 className="text-2xl font-bold">{user?.username}</h1>
