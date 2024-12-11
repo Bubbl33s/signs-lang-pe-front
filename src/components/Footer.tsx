@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import InfoModal from './InfoModal';
+import AboutUs from './AboutUs';
+import HowToContribute from './HowToContribute';
 import { HandIndex } from 'react-bootstrap-icons';
 
 export default function Footer() {
@@ -30,20 +32,20 @@ export default function Footer() {
         </div>
         <section className="flex justify-center gap-4 mt-2">
           <button
-            onClick={() => openModal('Sobre este proyecto', <div></div>)}
-            className="bg-white text-purple-600 px-4 py-2 rounded-md hover:bg-purple-500 hover:text-white"
+            onClick={() => openModal('Sobre este proyecto', <AboutUs />)}
+            className="font-medium hover:text-purple-200 hover:scale-105 transition-all"
           >
             Sobre este proyecto
           </button>
           <button
-            onClick={() => openModal('Cómo contribuir', <div></div>)}
-            className="bg-white text-purple-600 px-4 py-2 rounded-md hover:bg-purple-500 hover:text-white"
+            onClick={() => openModal('Cómo contribuir', <HowToContribute />)}
+            className="font-medium hover:text-purple-200 hover:scale-105 transition-all"
           >
             Cómo contribuir
           </button>
         </section>
       </footer>
-      {/* Modal reutilizable */}
+
       <InfoModal
         isOpen={isOpen}
         onClose={closeModal}
