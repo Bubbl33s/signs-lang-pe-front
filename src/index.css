@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+main {
+  flex: 1;
+  padding: 12px 16px;
+}

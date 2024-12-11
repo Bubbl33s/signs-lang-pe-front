@@ -10,8 +10,6 @@ import { ContentService } from '../services/contentService';
 import { LabelService } from '../services/labelService';
 import { showToast } from '../helpers/toastify';
 import { onErrors } from '../helpers/onErrors';
-import 'toastify-js/src/toastify.css';
-import '../assets/styles/Toastify.css';
 
 type FormData = {
   categoryId?: string;
