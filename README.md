@@ -1,33 +1,59 @@
-# ReactJS + TypeScript + ViteJS + ESLint
+# 🧸 Signs Lang Peru
 
-This repository provides a template for a ReactJS project using ViteJS, TypeScript, ESLint and Prettier.
+Educational and interactive application about Peruvian sign language, with features such as user management, learning and using signs, and interactive content.
 
-## Start project
+## ✨ Features
 
-To run the project locally, run the following commands
-```
-npm install
-npm run dev
-```
+### 🤝 Dictionary
 
-To lint your code with ESLint and automatically fix fixable issues
-```
-npm run lint
-```
+- Community-driven and free dictionary of Peruvian sign language
+- Filterable by category
+- View multiple images per sign
 
-To format your code with Prettier and apply consistent styling
-```
-npm run format
-```
+### 📃 Contribution
 
-## Technologies
+- Allows uploading images of signs, either for registered or new words
+- Enables moderators to view and validate uploaded images
 
-- [ViteJS](https://vitejs.dev/) is a build tool that offers an ultra-fast development experience. It leverages the native ES module system, providing instant server startup and hot module replacement (HMR). Speed up your workflow and streamline your development process with ViteJS.
+### 🔑 Authentication
 
-- [Typescript](https://www.typescriptlang.org) provides strong typing and better code quality, reducing errors and enhancing maintainability as your project grows.
+- User registration and login
+- Password hashing and verification
 
-- [Eslint](https://eslint.org) enforces coding standards and identifies potential issues, ensuring code consistency and improving overall code quality.
+## 🛠️ Development Technologies
 
-- [Airbnb Style Guide](https://github.com/airbnb/javascript) provides a widely recognized and well-documented set of coding conventions, enhancing code readability, maintainability, and collaboration with other developers, while also aligning your project with industry best practices.
+- **Node.js**: JavaScript runtime built on Chrome's V8 engine.
+- **TypeScript**: Typed superset of JavaScript that compiles to plain JavaScript.
+- **React.js**: A JavaScript library for building user interfaces.
+- **Tailwind CSS**: A utility-first CSS framework for rapid UI development.
+- **Axios**: Promise-based HTTP client for the browser and Node.js.
+- **React Context API**: A way to manage state globally in a React application.
+- **Toastify-js**: A JavaScript library for displaying toast notifications.
+- **React Photo Gallery**: A responsive, accessible, and customizable photo gallery component for React.
+- **Swiper.js**: A modern touch slider for mobile devices and web browsers.
+- **Headless UI**: Unstyled, fully accessible UI components for React.
+- **Bootstrap Icons**: Official open-source SVG icon library for Bootstrap.
+- **React Drag N Drop**: A set of higher-order components to help you build complex drag-and-drop interfaces.
+- **UI Avatars**: Generate avatars with initials from names.
 
-- [Prettier](https://prettier.io/docs/en/) automatically formats code, saving time and ensuring a consistent code style throughout the project, which is crucial for collaboration and readability.
+### Code Quality
+
+- **Prettier**: Code formatter to ensure consistent style.
+- **Husky**: Git hooks to automate tasks.
+- **Commitlint**: Lint commit messages.
+- **ESLint (Airbnb)**: Pluggable linting utility for JavaScript and JSX.
+- **EditorConfig**: Maintain consistent coding styles between different editors and IDEs.
+
+## 💻️ Deployment
+
+[Lengua de Señas Peruana](https://signs-lang-pe-front.vercel.app/)
+
+Deployed in Vercel.
+
+## 🧖 Author
+
+Valeria Lozano _a.k.a._ **Bubbl33s**
+
+- [LinkedIn](https://www.linkedin.com/in/valeria-lozano-275b86263/)
+- [Codepen](https://codepen.io/Bubbl33s)
+- [GitHub](https://www.your-site.com)
