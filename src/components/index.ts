@@ -6,6 +6,12 @@ import DragDrop from './DragDrop';
 import LoadingSpinner from './LoadingSpinner';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
 import Gallery from './Gallery';
+import Footer from './Footer';
+import InfoModal from './InfoModal';
+import AboutUs from './AboutUs';
+import HowToContribute from './HowToContribute';
+import Importance from './Importance';
+import Scalabilty from './Scalabilty';
 
 export {
   Header,
@@ -16,4 +22,10 @@ export {
   LoadingSpinner,
   DeleteConfirmationModal,
   Gallery,
+  Footer,
+  InfoModal,
+  AboutUs,
+  HowToContribute,
+  Importance,
+  Scalabilty,
 };
