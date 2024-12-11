@@ -57,7 +57,7 @@ export default function DragDrop({ file, setFile, loading }: DragDropProps) {
   );
 
   return (
-    <div className="flex h-64 items-center justify-center sm:h-80 md:h-96 lg:h-[440px]">
+    <div className="flex h-64 items-center justify-center sm:h-80 md:h-96">
       <div
         className={`${file != null ? 'hidden' : 'flex'} hover:text-gray-900`}
       >
@@ -73,7 +73,7 @@ export default function DragDrop({ file, setFile, loading }: DragDropProps) {
         <div className="h-full flex flex-col justify-between items-center">
           <img
             src={URL.createObjectURL(file)}
-            className={`h-52 object-contain sm:h-64 md:h-80 lg:h-96 ${
+            className={`h-52 object-contain sm:h-64 md:h-80 ${
               loading && 'blur-sm'
             }`}
           />
